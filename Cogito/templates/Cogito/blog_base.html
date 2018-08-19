@@ -1,0 +1,129 @@
+{% extends "Cogito/head_base.html" %} 
+
+{% block extrastyles %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'Cogito/css/custom.css' %}">
+<link rel="stylesheet" href="{% static 'Cogito/css/index.css' %}">
+<link rel="stylesheet" href="{% static 'Cogito/css/forms.css' %}">
+{% endblock %}
+
+
+{% block body %}  
+<div class="row"> 
+  <div class="two columns" style="margin-top: 2%"></div>
+  <div class="seven columns" style="margin-top: 2%"> 
+
+
+     <!-- Main Page Title
+      ----------------------------------------------->
+    <section class="header">
+      <h1 class="title" id="maintitle">Deliberate Living</h1>
+    </section>
+
+    <div class="navbar-spacer"></div>
+
+
+    <!-- Navigation bar 
+      ----------------------------------------------->
+
+    <nav class="navbar">
+      <div class="container navcont">
+        <ul class="navbar-list">
+        {% for direc in site_struct %}  
+          {% if direc.1|length == 1 %}
+            <li class="navbar-item">
+              {% with "Cogito:"|add:direc.1.0 as cur_url %} 
+                <a class="navbar-link" href="{% url cur_url %}"> {{ direc.0 }} </a> </li>
+              {% endwith %}
+          {% else %}
+            <li class="navbar-item">
+              <a class="navbar-link" href="#" data-popover="#codeNavPopover{{ forloop.counter }}">
+                  {{ direc.0 }} </a>
+              <div id="codeNavPopover{{ forloop.counter }}" class="popover">
+                <ul class="popover-list">
+                  {% for page in direc.1 %}
+                    <li class="popover-item">
+                      {% with "Cogito:"|add:page as cur_url %}
+                        <a class="popover-link" href="{% url cur_url %}"> 
+                        {{ page }} </a> </li> 
+                      {% endwith %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}  
+        </ul>
+      </div>
+    </nav> 
+    
+
+    <!-- Full body of previous Posts 
+      ----------------------------------------------->
+    <div id="postset">
+    {% block postset %} 
+        {% for post in posts %}
+          {% include 'Cogito/post_view.html' %}  
+        {% endfor %} 
+    {% endblock %} 
+    </div>
+
+
+
+    <!-- Form to add new posts  
+      ----------------------------------------------->
+    <div class="docs-section" id="sep1a">  
+      <div class="changeblog" id="addform_button"><button class="addblog">Add</button></div>
+      {% include "Cogito/blog_form.html" with form_id='add_form' type='create_post' %}
+    </div>
+
+    <div class="docs-section" id="sep2a"> 
+
+
+    <!-- Footer  
+      ----------------------------------------------->
+    <code> Daniel Chafamo | 2018</code></div>
+
+  </div>  
+
+
+  <!-- Sidebar 
+    ----------------------------------------------->
+  <div class="three columns sidebar"> 
+    <div class="logup">
+      <a href="{% url 'Cogito:home' %}"> Settings </a>
+      <a href="{% url 'Cogito:logout' %}"> Log out </a>
+    </div>
+
+
+    <!-- List of previous post titles  
+      ----------------------------------------------->
+    {% block sidebar %} 
+      <div id="content-related">
+        <div class="module" id="recent-actions-module">
+          <h2>Previous Posts</h2>  
+          <ul class="actionlist">
+          {% for post in posts %}
+            <li> <a href="#post_{{ post.id }}">{{ post.title }}</a> <br/> </li>
+          {% endfor %}
+          </ul> 
+        </div>
+      </div>
+    {% endblock %}
+
+  </div>
+</div>
+{% endblock %}
+
+
+{% block extrascripts %}  
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script> 
+<script> 
+
+  tinymce.init({ 
+    selector: '#id_text',
+    height: 400, 
+  });
+</script>
+{% endblock %}
+

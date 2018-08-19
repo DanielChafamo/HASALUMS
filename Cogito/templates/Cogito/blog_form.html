@@ -1,0 +1,31 @@
+<div id="form_{{ form_id }}" style="display: none;"> 
+  <form method="POST" class="post-form" id="{{ type }}">{% csrf_token %} 
+    <div class="aligned"> 
+
+      <label>Title:</label>  
+      <input class="u-half-width" type="text" name="title" value="{{ defaults.title }}" required>
+      <span class="validity"></span><br>
+    
+      <label>Text:</label>  
+      <textarea id="id_text" class="u-full-width" type="text" name="text" required>
+        {{ defaults.text  }}
+      </textarea>
+      <span class="validity"></span>
+
+      <label>Destination:</label> 
+      <select name="destination" required>
+          {% for category in categories %}
+            <option value="{{ category|capfirst }}" 
+              {% if defaults.destination|lower == category|lower %} selected {% endif %}> 
+              {{ category|capfirst }}
+            </option>  
+          {% endfor %} 
+      </select> <br>
+
+      <input type="hidden" name="pid" value="{{ defaults.id }}">
+    </div>
+    <div class="centerd_button">
+      <button type="submit">Post</button>
+    </div>
+  </form> 
+</div>

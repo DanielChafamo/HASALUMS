@@ -1,0 +1,37 @@
+<div class="docs-section" id="section_{{ post.id }}"> 
+  <div id="post_{{ post.id }}">
+    <h6 id="post_title" class="docs-header">{{ post.title }}</h6> 
+    <p id="post_text" >{{ post.text|linebreaksbr }}</p> 
+    <code>Danievsky | {{ post.published_date }}</code> 
+  </div>
+  {% include "Cogito/blog_form.html" with defaults=post form_id=post.id type='update_post' %}
+  <div class="changeblog">
+    <form method="POST" id='delete_post'>{% csrf_token %}  
+      <input type="hidden" name="pid" value="{{ post.id }}">
+      <button type="submit" class="deleteblog">
+        Delete
+      </button>
+    </form> 
+  </div>
+  <div class="changeblog">
+    <button class="editblog" id="edit_{{ post.id }}">
+      Edit
+    </button>
+  </div>
+  <div class="changeblog resp">
+    <button class="like" id="like_{{ post.id }}">
+      Like
+    </button>
+  </div>
+  <div class="changeblog resp">
+    <button class="bookmark" id="bookmark_{{ post.id }}">
+      Bookmark
+    </button>
+  </div><br>
+<!--   <div class="changeblog resp">
+    <button class="comment" id="comment_{{ post.id }}">
+      Comment
+    </button>
+  </div> -->
+
+</div>  
