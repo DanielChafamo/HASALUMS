@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="{% static 'Cogito/css/normalize.css' %}">
   <link rel="stylesheet" href="{% static 'Cogito/css/skeleton.css' %}">
   <link rel="stylesheet" href="{% static 'Cogito/css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'Cogito/css/custom.css' %}">
+  <link rel="stylesheet" href="{% static 'Cogito/css/index.css' %}">
   {% block extrastyles %} {% endblock %}
 
   <!-- Favicon
@@ -33,11 +35,22 @@
 </head>
 <body class="code-snippets-visible {% block extrabodyclass %} {% endblock %}">
 
-  {% block body %} {% endblock %}
- 
+  {% block body %} 
+
+  {% endblock %}
+  
+  {% block footer %}
+  <footer>
+     <!-- Footer  
+    ----------------------------------------------->
+    <div class="bottom_row">
+      <code> Daniel Chafamo | 2018</code>
+    </div>
+  </footer>
+  {% endblock %}
+
   <!-- Scripts --> 
   <script type="text/javascript" src="{% static 'External/js/jquery-1.11.3.min.js' %}" ></script>
-  <script type="text/javascript" src="{% static 'Cogito/js/site.js' %}" ></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>    
   <script type="text/javascript" src="{% static 'Cogito/js/csrf_form_ajax.js' %}"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>  -->

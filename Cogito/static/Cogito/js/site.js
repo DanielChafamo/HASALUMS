@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 
   // Variables
@@ -7,9 +8,8 @@ $(document).ready(function() {
       $window = $(window),
       $popoverLink = $('[data-popover]'),
       $addformButton = $('#addform_button'),
-      // $createPostForm = $('#create_post'),
-      // $updatePostForm = $('#update_post'),
-      // $deletePostForm = $('#delete_post'),
+      $createPostForm = $('#create_post'), 
+      $deletePostButton = $('.deleteblog'),
       navOffsetTop = $nav.offset().top,
       $document = $(document),
       entityMap = {
@@ -27,23 +27,25 @@ $(document).ready(function() {
     $popoverLink.on('click', openPopover)
     $document.on('click', closePopover)
     $addformButton.on('click', openAddForm)
-    // $createPostForm.on('submit', createPostForm)
-    // $updatePostForm.on('submit', updatePostForm)
-    // $deletePostForm.on('submit', deletePostForm)
+    $createPostForm.on('submit', createPostForm)
+    $deletePostButton.on('click', deletePost) 
+    $('form[id^="update_post"]').on('submit', updatePostForm)
     $('a[href^="#"]').on('click', smoothScroll)
     $('button[id^="edit_"]').on('click', editForm)
     $('button[id^="like_"]').on('click', like)
     $('button[id^="comment_"]').on('click', comment)
     $('button[id^="bookmark_"]').on('click', bookmark)
     buildSnippets();
+    markLikesBookmarks();
+    showChangeButtons();
   }
 
   function createPostForm(e) {
-    e.preventDefault();
-    console.log('form submitted', e.currentTarget);
+    e.preventDefault(); 
     var $target = e.currentTarget;
     $.ajax({
       url: '/ajax/create_post/',
+      method: 'POST',
       data: {
         'title': $target[1].value,
         'text': $target[2].value, 
@@ -55,11 +57,11 @@ $(document).ready(function() {
           $target[1].value = ""
           $target[2].value = "" 
           $("#form_add_form").toggle(); 
-          let curr = target.action.split('/')[3];
+          let curr = $target.action.split('/')[3];
           if (curr == "") curr = "Home";
           if (curr == data['destination']) {
             var post = data;
-            $('#postset').add('{% include post_view.html %}')
+            $('#postset').after("{% autoescape off %}{% include 'Cogito/post_view.html' %}{% endautoescape off %}")
           }
         } else if (data["error"]){
           console.log(data["error"]);
@@ -69,11 +71,11 @@ $(document).ready(function() {
   }
 
   function updatePostForm(e) {
-    e.preventDefault();
-    console.log('form submitted', e.currentTarget);
+    e.preventDefault(); 
     var $target = e.currentTarget;
     $.ajax({
       url: '/ajax/update_post/',
+      method: 'POST',
       data: {
         'title': $target[1].value,
         'text': $target[2].value, 
@@ -85,14 +87,15 @@ $(document).ready(function() {
         if (data["success"]) {
           $form = $('#form_' + data['pid']);
           $form.toggle();
-          let curr = target.action.split('/')[3];
+          let curr = $target.action.split('/')[3];
           if (curr == "") curr = "Home";
           if (curr == data['destination']) {
             $post = $('#post_' + data['pid']); 
             var $children = $post.children();
-            $children[0].value = data["title"];
-            $children[1].value = data["text"];
+            $children[0].innerText = data["title"];
+            $children[1].innerText = data["text"];
             $post.toggle();
+            console.log($children)
           } else {
             $section = $('#section_' + data['pid']); 
             $section.toggle();
@@ -104,12 +107,12 @@ $(document).ready(function() {
     });
   }
 
-  function deletePostForm(e) {
-    e.preventDefault();
-    console.log('form submitted', e.currentTarget);
+  function deletePost(e) { 
+    e.preventDefault(); 
     $.ajax({
       url: '/ajax/delete_post/',
-      data: {''},
+      method: 'POST',
+      data: {'pid': e.target.id.split('_')[1]},
       dataType: 'json',
       success: function (data) { 
         if (data["success"]) {
@@ -120,17 +123,50 @@ $(document).ready(function() {
       }
     });
   }
-  function like(e) {
-    $('#'+e.target.id)[0].style.background="url(../static/Cogito/img/icon-heart.svg) 0 1px no-repeat";
 
+  function like(e) { 
+    $.ajax({
+      url: '/ajax/log_response/',
+      method: 'POST',
+      data: {'type': 'like', 'pid': e.target.id.split('_')[1]},
+      dataType: 'json',
+      success: function (data) { 
+        if (data["success"]) {
+          $('#'+e.target.id)[0].style.background = 
+            "url(../static/Cogito/img/icon-heart.svg) 0 1px no-repeat";
+          $target = $('#like_count_'+e.target.id.split('_')[1]);
+          $target[0].text = parseInt($target[0].text)+1;
+        } else if (data["redirect"]) {
+          console.log(data["redirect"])
+        }else if (data["error"]){
+          console.log(data["error"]);
+        }
+      }
+    });
   }
 
   function comment(e) {
-    $('#'+e.target.id)[0].style.background="url(../static/Cogito/img/icon-comment.svg) 0 1px no-repeat";
+    $('#'+e.target.id)[0].style.background = 
+      "url(../static/Cogito/img/icon-comment.svg) 0 1px no-repeat";
   }
 
   function bookmark(e) {
-    $('#'+e.target.id)[0].style.background="url(../static/Cogito/img/icon-bookmark.svg) 0 1px no-repeat";
+    $.ajax({
+      url: '/ajax/log_response/',
+      method: 'POST',
+      data: {'type': 'bookmark', 'pid': e.target.id.split('_')[1]},
+      dataType: 'json',
+      success: function (data) {  
+        if (data["success"]) {
+          $('#'+e.target.id)[0].style.background = 
+            "url(../static/Cogito/img/icon-bookmark.svg) 0 1px no-repeat";
+        } else if (data["redirect"]) {
+          console.log(data["redirect"])
+        } else if (data["error"]) {
+          console.log(data["error"]);
+        }
+      }
+    });
   }
 
   function openAddForm() {
@@ -208,6 +244,21 @@ $(document).ready(function() {
     })
   }
 
+  function markLikesBookmarks() { 
+    for (var i = liked.length - 1; i >= 0; i--) { 
+      $('#like_'+liked[i])[0].style.background = 
+        "url(../static/Cogito/img/icon-heart.svg) 0 1px no-repeat";
+    }  
+    for (var i = bookmarked.length - 1; i >= 0; i--) {
+      $('#bookmark_'+bookmarked[i])[0].style.background = 
+        "url(../static/Cogito/img/icon-bookmark.svg) 0 1px no-repeat";
+    } 
+  }
+
+  function showChangeButtons() {
+    for (var i = created.length - 1; i >= 0; i--) 
+      $('#changes_'+created[i]).toggle();
+  }
 
   init();
 

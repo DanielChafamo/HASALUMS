@@ -13,7 +13,9 @@ app_name = 'Cogito'
 
 auth_url_patterns = [  
   url(r'^login/$', auth_views.login, name='login'), 
-  url(r'^logout/$', auth_views.logout, {'next_page': '/login/'}, name='logout'),  
+  url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'), 
+  # url(r'^signup/$', auth_views.signup, name='login'), 
+  url(r'^profile/$', views.ProfilePage, name='profile'),  
 ] 
 
 curd_url_patterns = [

@@ -1,0 +1,26 @@
+{% extends "Cogito/site_base.html" %} 
+
+{% block leftsidebar %}
+
+{% endblock %}
+
+{% block bodycenter %}
+<!-- Full body of previous Posts 
+  ----------------------------------------------->
+<div id="postset">
+{% block postset %} 
+    {% for post in posts %}
+      {% include 'Cogito/post_view.html' %}  
+    {% endfor %} 
+{% endblock %} 
+</div> 
+ 
+
+<div class="docs-section" id="sep2a">  </div>
+
+{% endblock %}
+
+
+{% block rightsidebar %}  
+
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends "Cogito/head_base.html" %} 
+{% extends "Cogito/site_base.html" %} 
 
 {% block title %} Log In {% endblock %} 
 
@@ -13,12 +13,10 @@
 
 {% block extrabodyclass %} login {% endblock %}
 
-{% block body %}  
+{% block bodycenter %}  
 
 <div id="container">
-  <div id="header">
-    <h1><a>Deliberate Living</a></h1>
-  </div>
+  
   <div id="content" class="colM">
     {% if form.errors and not form.non_field_errors %}
       <p class="errornote">

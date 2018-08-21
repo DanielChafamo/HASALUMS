@@ -5,20 +5,20 @@
     <code>Danievsky | {{ post.published_date }}</code> 
   </div>
   {% include "Cogito/blog_form.html" with defaults=post form_id=post.id type='update_post' %}
-  <div class="changeblog">
-    <form method="POST" id='delete_post'>{% csrf_token %}  
-      <input type="hidden" name="pid" value="{{ post.id }}">
-      <button type="submit" class="deleteblog">
-        Delete
+  <div id='changes_{{ post.id }}' style="display: none;">
+    <div class="changeblog">
+      <button class="deleteblog" id="delete_{{ post.id }}">
+          Delete
+      </button> 
+    </div>
+    <div class="changeblog">
+      <button class="editblog" id="edit_{{ post.id }}">
+        Edit
       </button>
-    </form> 
-  </div>
-  <div class="changeblog">
-    <button class="editblog" id="edit_{{ post.id }}">
-      Edit
-    </button>
+    </div>
   </div>
   <div class="changeblog resp">
+    <a id='like_count_{{ post.id }}'>{{ post.liked_by.count }}</a>
     <button class="like" id="like_{{ post.id }}">
       Like
     </button>
@@ -34,4 +34,4 @@
     </button>
   </div> -->
 
-</div>  
+</div>   

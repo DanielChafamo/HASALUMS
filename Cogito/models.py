@@ -11,8 +11,9 @@ class Post(models.Model):
     destination = models.CharField(max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
-    created_by = models.ForeignKey(User, default=dan.pk, on_delete=models.CASCADE)
-    likes = models.IntegerField(default=0)
+    created_by = models.ForeignKey(User, related_name="created", default=dan.pk, on_delete=models.CASCADE) 
+    liked_by = models.ManyToManyField(User, related_name="liked")
+    bookmarked_by = models.ManyToManyField(User, related_name="bookmarked")
 
     def publish(self):
         self.published_date = timezone.now()
