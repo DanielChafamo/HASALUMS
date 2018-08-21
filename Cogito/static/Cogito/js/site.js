@@ -4,13 +4,14 @@ $(document).ready(function() {
   // Variables
   var $codeSnippets = $('.code-example-body'),
       $nav = $('.navbar'),
+      $crum = $('.breadcrums'),
       $body = $('body'),
       $window = $(window),
       $popoverLink = $('[data-popover]'),
       $addformButton = $('#addform_button'),
       $createPostForm = $('#create_post'), 
-      $deletePostButton = $('.deleteblog'),
-      navOffsetTop = $nav.offset().top,
+      $deletePostButton = $('.deleteblog'), 
+      crumOffsetTop = $crum.offset().top,
       $document = $(document),
       entityMap = {
         "&": "&amp;",
@@ -30,7 +31,7 @@ $(document).ready(function() {
     $createPostForm.on('submit', createPostForm)
     $deletePostButton.on('click', deletePost) 
     $('form[id^="update_post"]').on('submit', updatePostForm)
-    $('a[href^="#"]').on('click', smoothScroll)
+    $('a[href^="#"]').on('click', toPost)
     $('button[id^="edit_"]').on('click', editForm)
     $('button[id^="like_"]').on('click', like)
     $('button[id^="comment_"]').on('click', comment)
@@ -61,7 +62,7 @@ $(document).ready(function() {
           if (curr == "") curr = "Home";
           if (curr == data['destination']) {
             var post = data;
-            $('#postset').after("{% autoescape off %}{% include 'Cogito/post_view.html' %}{% endautoescape off %}")
+            $('#postset').after($.parseHTML("{% autoescape off %}{% include 'Cogito/post_view.html' %}{% endautoescape off %}"));
           }
         } else if (data["error"]){
           console.log(data["error"]);
@@ -137,7 +138,7 @@ $(document).ready(function() {
           $target = $('#like_count_'+e.target.id.split('_')[1]);
           $target[0].text = parseInt($target[0].text)+1;
         } else if (data["redirect"]) {
-          console.log(data["redirect"])
+          window.location.href = data["redirect"]
         }else if (data["error"]){
           console.log(data["error"]);
         }
@@ -161,7 +162,7 @@ $(document).ready(function() {
           $('#'+e.target.id)[0].style.background = 
             "url(../static/Cogito/img/icon-bookmark.svg) 0 1px no-repeat";
         } else if (data["redirect"]) {
-          console.log(data["redirect"])
+          window.location.href = data["redirect"]
         } else if (data["error"]) {
           console.log(data["error"]);
         }
@@ -181,19 +182,25 @@ $(document).ready(function() {
     $post.toggle();
   }
 
+  function toPost(e) { 
+    if ($("#crumlink")[0]) {
+      $("#crumlink")[0].innerText = e.target.innerHTML
+      $("#crumlink")[0].href = e.target.hash
+    } else {
+      $crumlink = $.parseHTML('&rsaquo; <a id="crumlink" href='+e.target.hash+'>'+e.target.innerHTML+'</a>');
+      $('.breadcrums')[0].lastChild.after($crumlink[0]);
+      $('.breadcrums')[0].lastChild.after($crumlink[1]);
+    }
+    smoothScroll(e);
+  }
   function smoothScroll(e) {
-    e.preventDefault();
+    e.preventDefault(); 
     $(document).off("scroll");
-    var target = this.hash,
-        menu = target;
-    console.log(this.hash);
-    $top = $(target).offset().top;
-    $('html, body').stop().animate({
-        'scrollTop': $top - 40
-    }, 0, 'swing', function () {
-        window.location.hash = target;
-        $(document).on("scroll", onScroll);
-    });
+    var target = e.target.hash;
+    $('html, body').animate({
+        scrollTop: $(target).offset().top - 100
+    }, 200);
+    onScroll();
   }
 
   function openPopover(e) {
@@ -217,17 +224,17 @@ $(document).ready(function() {
 });
 
   function resize() {
-    $body.removeClass('has-docked-nav')
-    navOffsetTop = $nav.offset().top
+    $body.removeClass('has-docked-crum') 
+    crumOffsetTop = $crum.offset().top
     onScroll()
   }
 
   function onScroll() {
-    if(navOffsetTop < $window.scrollTop() && !$body.hasClass('has-docked-nav')) {
-      $body.addClass('has-docked-nav')
+    if(crumOffsetTop  < $window.scrollTop()+25 && !$body.hasClass('has-docked-crum')) {
+      $body.addClass('has-docked-crum')
     }
-    if(navOffsetTop > $window.scrollTop() && $body.hasClass('has-docked-nav')) {
-      $body.removeClass('has-docked-nav')
+    if(crumOffsetTop > $window.scrollTop()+25 && $body.hasClass('has-docked-crum')) {
+      $body.removeClass('has-docked-crum')
     }
   }
 

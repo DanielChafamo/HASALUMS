@@ -20,58 +20,90 @@
   </div>
 </div>
 
+
+<!-- Navigation bar 
+  ----------------------------------------------->
+<div class="navbar-spacer"></div>
+
+<nav class="navbar">
+   <!-- Main Page Title
+    ----------------------------------------------->
+ 
+  <div class="container navcont"> 
+    <h1 class="title" id="maintitle">Deliberate Living</h1>
+
+    <ul class="navbar-list">
+    {% for direc in site_struct %}  
+      {% if direc.1|length == 1 %}
+        <li class="navbar-item">
+          {% with "Cogito:"|add:direc.1.0 as cur_url %} 
+            <a class="navbar-link button {% if category == direc.1.0%} active {% endif %}" 
+               href="{% url cur_url %}"> {{ direc.0 }} </a> </li>
+          {% endwith %}
+      {% else %}
+        <li class="navbar-item">
+          <a class="navbar-link button {% if category in direc.1 %} active {% endif %}" 
+             href="#" data-popover="#codeNavPopover{{ forloop.counter }}">
+              {{ direc.0 }} </a>
+          <div id="codeNavPopover{{ forloop.counter }}" class="popover">
+            <ul class="popover-list">
+              {% for page in direc.1 %}
+                <li class="popover-item">
+                  {% with "Cogito:"|add:page as cur_url %}
+                    <a class="popover-link" href="{% url cur_url %}"> 
+                    {{ page }} </a> </li> 
+                  {% endwith %}
+              {% endfor %}
+            </ul>
+          </div>
+        </li>
+      {% endif %}
+    {% endfor %}  
+    </ul>
+  </div>
+</nav> 
+
+<div class="blackboard">
+</div>
+
+<div class="breadcrums">
+  <a href="{% url 'Cogito:home' %}">Deliberate Living</a> 
+  {% for direc in site_struct %} 
+    {% if direc.1|length == 1 and direc.1.0 == category %}
+      &rsaquo; 
+      {% with "Cogito:"|add:direc.1.0 as cur_url %} 
+        <a href="{% url cur_url %}"> {{ direc.1.0| capfirst }} </a>
+      {% endwith %}
+    {% else %}
+      {% if category in direc.1 %} 
+        &rsaquo; 
+        {% with "Cogito:"|add:direc.0 as cur_url %} 
+          <a> {{ direc.0| capfirst }} </a>
+        {% endwith %}
+      {% endif %}
+      {% for page in direc.1 %} 
+        {% if page == category %}
+          &rsaquo; 
+          {% with "Cogito:"|add:page as cur_url %}
+            <a href="{% url cur_url %}"> {{ page|capfirst }} </a>  
+          {% endwith %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %} 
+</div>
+
+
 <div class="row"> 
   <div class="two columns" style="margin-top: 2%">
     {% block leftsidebar %}
+    <div class="pagecrums">
+      
+    </div>
     {% endblock %}
 
   </div>
   <div class="seven columns" style="margin-top: 2%"> 
-
-
-     <!-- Main Page Title
-      ----------------------------------------------->
-    <section class="header">
-      <h1 class="title" id="maintitle">Deliberate Living</h1>
-    </section>
-
-    <div class="navbar-spacer"></div>
-
-
-    <!-- Navigation bar 
-      ----------------------------------------------->
-
-    <nav class="navbar">
-      <div class="container navcont">
-        <ul class="navbar-list">
-        {% for direc in site_struct %}  
-          {% if direc.1|length == 1 %}
-            <li class="navbar-item">
-              {% with "Cogito:"|add:direc.1.0 as cur_url %} 
-                <a class="navbar-link" href="{% url cur_url %}"> {{ direc.0 }} </a> </li>
-              {% endwith %}
-          {% else %}
-            <li class="navbar-item">
-              <a class="navbar-link" href="#" data-popover="#codeNavPopover{{ forloop.counter }}">
-                  {{ direc.0 }} </a>
-              <div id="codeNavPopover{{ forloop.counter }}" class="popover">
-                <ul class="popover-list">
-                  {% for page in direc.1 %}
-                    <li class="popover-item">
-                      {% with "Cogito:"|add:page as cur_url %}
-                        <a class="popover-link" href="{% url cur_url %}"> 
-                        {{ page }} </a> </li> 
-                      {% endwith %}
-                  {% endfor %}
-                </ul>
-              </div>
-            </li>
-          {% endif %}
-        {% endfor %}  
-        </ul>
-      </div>
-    </nav> 
-    
     {% block bodycenter %}
     {% endblock %}
 
