@@ -148,9 +148,9 @@
     font-size: 4.0rem;
     font-weight: 100;
     float: left;
-    padding-right: 400px;
-    padding-top: 10px;
-    width: 200px;
+    padding-right: 100px;
+    padding-top: 60px;
+    width: 500px;
   }
 
   .navbar + .docs-section {
@@ -162,8 +162,7 @@
   .navbar-spacer {
     margin-top: 25px; 
     display: block; 
-    height: 10rem; 
-    z-index: 99; 
+    height: 10rem;  
     background: url('../img/sos.png');
     border-bottom: 1px solid #eee; 
   }
@@ -196,7 +195,8 @@
     margin-bottom: 0;
     border-radius: 0;
     border: none;
-    margin-top: 11%;
+    margin-top: 13%;
+    height: 35px;
   }
 
   .navbar-link:focus {
@@ -211,15 +211,36 @@
 
   .navbar-link.active {
     color: #FFF; 
-    background: url('../img/bg4.png'); 
+    background: url('../img/bg4.png');  
   }
 
   .has-docked-crum .breadcrums {
     position: fixed;
-    top: 25px;
+    top: 61px;
     width: 100%;
+    z-index: 1;
   }
 
+  .has-docked-crum #postset {
+    margin-top: 25px;
+  }
+
+  .has-docked-crum .leftsidebar {
+    position: fixed;
+    top: 80px;
+    left: -7.8%;
+    width: inherit;
+  }
+
+  .has-docked-nav .navbar {
+    position: fixed;
+    width: 100%;
+    top: -65px;
+  }
+
+  .has-docked-nav .blackboard {
+    margin-top: 120px;
+  }
 
   /* Popover */
   .popover.open {
@@ -229,8 +250,9 @@
     display: none;
     position: absolute; 
     background: #fff;  
-    top: 102%;
+    top: 99%;
     left: 0%; 
+    z-index: 99;
   }
 
   .popover-list {

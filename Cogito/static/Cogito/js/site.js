@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   // Variables
   var $codeSnippets = $('.code-example-body'),
-      $nav = $('.navbar'),
+      $nav = $('.navbar-item'),
       $crum = $('.breadcrums'),
       $body = $('body'),
       $window = $(window),
@@ -12,7 +12,13 @@ $(document).ready(function() {
       $createPostForm = $('#create_post'), 
       $deletePostButton = $('.deleteblog'), 
       crumOffsetTop = $crum.offset().top,
+      navOffsetTop = $nav.offset().top,
       $document = $(document),
+      toc = document.querySelector( '.leftsidebar' ),
+      tocPath = document.querySelector( '.toc-marker path' ),
+      TOP_MARGIN = 0.1,
+      BOTTOM_MARGIN = 0.2, 
+      pathLength,
       entityMap = {
         "&": "&amp;",
         "<": "&lt;",
@@ -21,6 +27,7 @@ $(document).ready(function() {
         "'": '&#39;',
         "/": '&#x2F;'
       }
+    var tocItems;
 
   function init() {
     $window.on('scroll', onScroll)
@@ -39,6 +46,7 @@ $(document).ready(function() {
     buildSnippets();
     markLikesBookmarks();
     showChangeButtons();
+    drawPath(); 
   }
 
   function createPostForm(e) {
@@ -62,7 +70,7 @@ $(document).ready(function() {
           if (curr == "") curr = "Home";
           if (curr == data['destination']) {
             var post = data;
-            $('#postset').after($.parseHTML("{% autoescape off %}{% include 'Cogito/post_view.html' %}{% endautoescape off %}"));
+            $('#postset').after($.parseHTML("{% autoescape off %}{% include 'Cogito/post_view.html' %}{% endautoescape off %}")[0]);
           }
         } else if (data["error"]){
           console.log(data["error"]);
@@ -221,20 +229,31 @@ $(document).ready(function() {
     $('html, body').animate({
         scrollTop: $("#elementtoScrollToID").offset().top
     }, 2000);
-});
+  });
 
-  function resize() {
+  function resize() { 
+    drawPath();
     $body.removeClass('has-docked-crum') 
+    $body.removeClass('has-docked-nav') 
     crumOffsetTop = $crum.offset().top
+    navOffsetTop = $nav.offset().top
     onScroll()
   }
 
-  function onScroll() {
-    if(crumOffsetTop  < $window.scrollTop()+25 && !$body.hasClass('has-docked-crum')) {
+  function onScroll() { 
+    sync();
+    if(crumOffsetTop  < $window.scrollTop()+70 && !$body.hasClass('has-docked-crum')) {
       $body.addClass('has-docked-crum')
     }
-    if(crumOffsetTop > $window.scrollTop()+25 && $body.hasClass('has-docked-crum')) {
+    if(crumOffsetTop > $window.scrollTop()+70 && $body.hasClass('has-docked-crum')) {
       $body.removeClass('has-docked-crum')
+    }
+
+    if(navOffsetTop  < $window.scrollTop()+15 && !$body.hasClass('has-docked-nav')) {
+      $body.addClass('has-docked-nav')
+    }
+    if(navOffsetTop > $window.scrollTop()+15 && $body.hasClass('has-docked-nav')) {
+      $body.removeClass('has-docked-nav')
     }
   }
 
@@ -265,6 +284,80 @@ $(document).ready(function() {
   function showChangeButtons() {
     for (var i = created.length - 1; i >= 0; i--) 
       $('#changes_'+created[i]).toggle();
+  }
+
+  function drawPath() { 
+    tocItems = [].slice.call( toc.querySelectorAll( 'li' ) );
+    // Cache element references and measurements
+    tocItems = tocItems.map( function( item ) {
+      var anchor = item.querySelector( 'a' );
+      var target = document.getElementById( anchor.getAttribute( 'href' ).slice( 1 ) );
+      return {
+        listItem: item,
+        anchor: anchor,
+        target: target 
+      };
+    } );
+    // Remove missing targets
+    tocItems = tocItems.filter( function( item ) {
+      return !!item.target;
+    } );
+    var path = [];
+    var pathIndent;
+    tocItems.forEach( function( item, i ) {
+      var x = item.anchor.offsetLeft - 5,
+          y = item.anchor.offsetTop,
+          height = item.anchor.offsetHeight;
+      if( i === 0 ) {
+        path.push( 'M', x, y, 'L', x, y + height );
+        item.pathStart = 0;
+      }
+      else {
+        // Draw an additional line when there's a change in
+        // indent levels
+        if( pathIndent !== x ) path.push( 'L', pathIndent, y );
+        path.push( 'L', x, y );
+        // Set the current path so that we can measure it
+        tocPath.setAttribute( 'd', path.join( ' ' ) );
+        item.pathStart = tocPath.getTotalLength() || 0; 
+        path.push( 'L', x, y + height );
+      }
+      pathIndent = x;
+      tocPath.setAttribute( 'd', path.join( ' ' ) );
+      item.pathEnd = tocPath.getTotalLength();
+    } );
+    pathLength = tocPath.getTotalLength(); 
+  }
+
+  function sync() {
+    drawPath();
+    var windowHeight = window.innerHeight;
+    var pathStart = pathLength,
+        pathEnd = 0;
+    var visibleItems = 0;
+    tocItems.forEach( function( item ) {
+      var targetBounds = item.target.getBoundingClientRect();
+      if( targetBounds.bottom > windowHeight * TOP_MARGIN && targetBounds.top < windowHeight * ( 1 - BOTTOM_MARGIN ) ) {
+        pathStart = Math.min( item.pathStart, pathStart );
+        pathEnd = Math.max( item.pathEnd, pathEnd );
+        visibleItems += 1;
+        item.listItem.classList.add( 'visible' );
+      }
+      else {
+        item.listItem.classList.remove( 'visible' );
+      }
+      
+    } );
+    // Specify the visible path or hide the path altogether
+    // if there are no visible items
+    if( visibleItems > 0 && pathStart < pathEnd ) {
+      tocPath.setAttribute( 'stroke-dashoffset', '1' );
+      tocPath.setAttribute( 'stroke-dasharray', '1, '+ pathStart +', '+ ( pathEnd - pathStart ) +', ' + pathLength );
+      tocPath.setAttribute( 'opacity', 1 );
+    }
+    else {
+      // tocPath.setAttribute( 'opacity', 0 );
+    }
   }
 
   init();

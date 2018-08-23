@@ -2,6 +2,61 @@
 
 }
 
+/* Left Side bar */
+.leftsidebar { 
+  padding-left: 10%;   
+  padding-top: 3%;
+}
+
+.leftsidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 85%
+}
+
+.leftsidebar ul ul {
+  padding-left: 2em;
+}
+
+.leftsidebar ul li {
+  margin-bottom: 0; 
+}
+
+.leftsidebar li a {
+  display: inline-block;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.3s cubic-bezier(0.230, 1.000, 0.320, 1.000);
+}
+
+.leftsidebar li.visible>a {
+  color: #111;
+  transform: translate( 5px );
+}
+
+.toc-marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.toc-marker path {
+  transition: all 0.3s ease;
+}
+
+.has-docked-crum .leftsidebar {
+  position: fixed;
+  top: 80px;
+  left: -7.8%;
+}
+
+/* Others  */
+
 .borderedbox {
    border: 1px solid #eee;
  }
@@ -23,6 +78,7 @@
   background: #f8f8f8; 
   position: fixed;
   top:0;
+  z-index: 99;
 }
 
 .logup { 
