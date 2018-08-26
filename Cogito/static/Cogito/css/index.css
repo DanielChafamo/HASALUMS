@@ -49,12 +49,6 @@
   transition: all 0.3s ease;
 }
 
-.has-docked-crum .leftsidebar {
-  position: fixed;
-  top: 80px;
-  left: -7.8%;
-}
-
 /* Others  */
 
 .borderedbox {

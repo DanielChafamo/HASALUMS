@@ -32,6 +32,7 @@ $(document).ready(function() {
   function init() {
     $window.on('scroll', onScroll)
     $window.on('resize', resize)
+    // $popoverLink.hover(openPopover)//, closePopover)
     $popoverLink.on('click', openPopover)
     $document.on('click', closePopover)
     $addformButton.on('click', openAddForm)
@@ -230,6 +231,13 @@ $(document).ready(function() {
         scrollTop: $("#elementtoScrollToID").offset().top
     }, 2000);
   });
+
+  $('#toggle_bookmarked').click(function() {
+    console.log('b_e')
+    $('#bookmarked_entries').toggle()
+    $('#postset').toggle()
+  });
+
 
   function resize() { 
     drawPath();

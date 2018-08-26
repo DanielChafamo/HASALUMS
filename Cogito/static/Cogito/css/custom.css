@@ -10,12 +10,8 @@
   padding-left: 2%;
 }
 
-.pagecrums {
-/*  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-  background: honeydew;
-  padding-left: 2%;
-  height:800px;
-  width:100%;*/
+#postset {
+  padding: 0 5%;
 }
 
 .value-prop {
@@ -84,16 +80,6 @@
   letter-spacing: normal; 
 }
 
-.code-example {
-  margin-top: 1.5rem;
-  margin-bottom: 0; 
-}
-
-.code-example-body {
-  white-space: pre;
-  word-wrap: break-word 
-}
-
 .navbar {
   display: none; 
 }
@@ -141,9 +127,8 @@
 /* Larger than tablet */
 @media (min-width: 750px) {
   /* Navbar */
-  .title { 
-    letter-spacing: .2rem; 
-    color: navy; 
+  .title {  
+    color: orchid; 
     font-family: monospace;
     font-size: 4.0rem;
     font-weight: 100;
@@ -163,8 +148,9 @@
     margin-top: 25px; 
     display: block; 
     height: 10rem;  
-    background: url('../img/sos.png');
+    background: url('../img/bg2.png');
     border-bottom: 1px solid #eee; 
+    background-size: 3000px;
   }
 
   .navbar-spacer {

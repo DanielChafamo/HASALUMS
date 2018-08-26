@@ -29,12 +29,12 @@ Deliberate Living | {{ category|capfirst }}
 {% block bodycenter %}
 <!-- Full body of previous Posts 
   ----------------------------------------------->
-<div id="postset">
-{% block postset %} 
-    {% for post in posts %}
-      {% include 'Cogito/post_view.html' %}  
-    {% endfor %} 
-{% endblock %} 
+<div id="postset">  
+{% block postset %}  
+    {% for post in posts %}   
+      {% include 'Cogito/post_view.html' %}   
+    {% endfor %}  
+{% endblock %}  
 </div>
 
 <!-- Form to add new posts  
@@ -51,18 +51,6 @@ Deliberate Living | {{ category|capfirst }}
 {% endblock %}
 
 
-{% block rightsidebar %} 
-<!-- List of previous post titles  
-  ----------------------------------------------->
-<!-- <div id="content-related">
-  <div class="module" id="recent-actions-module">
-    <h2>Previous Posts</h2>  
-    <ul class="actionlist">
-    {% for post in posts %}
-      <li> <a href="#post_{{ post.id }}">{{ post.title }}</a> <br/> </li>
-    {% endfor %}
-    </ul> 
-  </div>
-</div> -->
+{% block rightsidebar %}  
 
 {% endblock %}

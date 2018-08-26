@@ -1,10 +1,16 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.utils import timezone
-from .forms import PostForm 
+from django.contrib.sites.shortcuts import get_current_site 
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode 
+from django.template.loader import render_to_string
+from django.contrib.auth import login 
+from .forms import SignUpForm, PostForm
+from .tokens import account_activation_token 
 from .models import Post
 import json
 import os
@@ -132,6 +138,54 @@ def ProfilePage(request):
 @login_required(login_url='/login/')
 def ViewBookmarked(request):
   Post.objects.filter(bookmarked_by__pk=request.user)
+
+
+# 
+# Auth views
+# 
+
+def SignUp(request):
+  if request.method == 'POST':
+
+    form = SignUpForm(request.POST)
+    if form.is_valid():
+      user = form.save(commit=False)
+      user.is_active = False
+      user.save()
+      current_site = get_current_site(request)
+      subject = 'Activate Your DL Account'
+      message = render_to_string('registration/account_activation_email.html', {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+        'token': account_activation_token.make_token(user),
+      })
+      user.email_user(subject, message)
+      return redirect('Cogito:AccountActivationSent')
+  else:
+    form = SignUpForm()
+  return render(request, 'registration/signup.html', context={'form': form})
+
+
+def Activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.profile.email_confirmed = True
+        user.save()
+        login(request, user)
+        return redirect('Cogito:home')
+    else:
+        return render(request, 'registration/account_activation_invalid.html')
+
+
+def AccountActivationSent(request):
+  return render(request, 'registration/account_activation_sent.html')
 
 # 
 # Helpers

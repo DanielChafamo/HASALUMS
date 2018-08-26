@@ -1,77 +1,103 @@
 /* LOGIN FORM */
 
 body.login {
-    background: 0;
+  /*background: url('../img/bg4.png');*/
 }
 
-.login #content {
-    padding: 20px 30px 0px 30px;
+.login .blackboard, .breadcrums {
+  display: none;
 }
+
+.login #logo {
+  width: 70px;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-bottom: 30px;
+}
+
 
 .login #container {
-    background: #fff;
-    border: 1px solid #eaeaea;
-    border-radius: 4px;
-    overflow: hidden;
-    width: 28em;
-    min-width: 300px;
-    margin: 251px auto;
-    margin-top: 0;
+  padding: 10%;
+  min-height: 350px;
+  box-shadow: 0 0 20px 2px rgb(154, 159, 162); 
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 23em;
+  margin: 10px auto;
 }
 
 .login #content-main {
-    width: 100%;
+  width: 100%;
 }
 
 .login .form-row {
-    padding: 4px 0;
-    float: left;
-    width: 100%;
-    border-bottom: none;
+  padding: 4px 0;
+  float: left;
+  width: 100%;
+  border-bottom: none;
 }
 
 .login .form-row label {
-    padding-right: 0.5em;
-    line-height: 2em;
-    font-size: 1em;
-    clear: both;
-    color: #333;
+  padding-right: 0.5em;
+  line-height: 2em;
+  font-size: 1em;
+  clear: both;
+  color: #333;
 }
 
-.login .form-row #id_username, .login .form-row #id_password {
-    clear: both;
-    padding: 8px;
-    width: 100%;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+.login .form-row #id_username, #id_password, #id_password1,
+#id_password2, #id_email, #id_first_name, #id_last_name {
+  border: none;
+  border-bottom: 1px solid #999;
+  border-radius: 0px;
+  clear: both;
+  padding: 8px;
+  width: 100%; 
 }
 
 .login span.help {
-    font-size: 10px;
-    display: block;
+  font-size: 10px;
+  display: block;
 }
 
 .login .submit-row {
-    clear: both;
-    padding: 0 0 1.5em 8em;
-    margin: 0;
-    border: none;
-    background: none;
-    text-align: left;
+  clear: both;
+  padding: 0;
+  margin: 0;
+  padding-top: 10%;
+  border: none;
+  text-align: center;
+  background: none;
 }
-.login .submit-row input {
-    line-height: 0;
-    text-transform: none;
-    font-weight: inherit;
-    padding: 0 20px;
+.login .submit-row input { 
+  width: 100%; 
 }
 
 .login .password-reset-link {
-    text-align: center;
+  text-align: center;
+}
+
+.login #notice {
+  color: cornflowerblue;
+  margin-left: 14%;
+  margin-bottom: 40px;
+} 
+
+.login #logo_title { 
+  text-align: center;
+  font-family: roboto;
+  font-size: 50px;
+  font-weight: 100;
+}
+
+.login #signup_portal {
+  text-align: center;
+  margin-top: 100px;
 }
 
 .navbar {
-    display: none;
+  display: none;
 }
 

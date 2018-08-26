@@ -14,7 +14,10 @@ app_name = 'Cogito'
 auth_url_patterns = [  
   url(r'^login/$', auth_views.login, name='login'), 
   url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'), 
-  # url(r'^signup/$', auth_views.signup, name='login'), 
+  url(r'^account_activation_sent/$', views.AccountActivationSent, name='AccountActivationSent'),
+  url(r'^activate/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/(?P<uidb64>[0-9A-Za-z_\-]+)/$',
+        views.Activate, name='activate'),
+  url(r'^signup/$', views.SignUp, name='SignUp'), 
   url(r'^profile/$', views.ProfilePage, name='profile'),  
 ] 
 

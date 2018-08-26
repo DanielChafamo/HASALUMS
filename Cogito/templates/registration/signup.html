@@ -1,6 +1,6 @@
 {% extends "Cogito/site_base.html" %} 
 
-{% block title %} Deliberate Living | Log In {% endblock %} 
+{% block title %} Deliberate Living | Sign Up {% endblock %} 
 
 {% block extrastyles %}
 {% load staticfiles %} 
@@ -15,10 +15,7 @@
 {% block bodycenter %}  
 
 <div id="container"> 
-  <h4 id='logo_title'> Deliberate Living </h4>
-  <!-- <div id="notice"> 
-    Please enter your username and password to continue. 
-  </div> -->
+  <h4 id='logo_title'> Deliberate Living </h4> 
   <div id="content" class="colM">
     {% if form.errors and not form.non_field_errors %}
       <p class="errornote">
@@ -38,26 +35,38 @@
 
     <div id="content-main">
 
-    <form action="{{ app_path }}" class="post-form" method="post" id="login-form">{% csrf_token %}
+    <form method="POST" class="post-form" id="login-form">{% csrf_token %}
       <div class="aligned"> 
+       <!--  <div class="form-row">
+          {{ form.first_name.errors }}
+          {{ form.first_name.label_tag }} {{ form.first_name }} 
+        </div>
+        <div class="form-row">
+          {{ form.last_name.errors }}
+          {{ form.last_name.label_tag }} {{ form.last_name }} 
+        </div> -->
         <div class="form-row">
           {{ form.username.errors }}
           {{ form.username.label_tag }} {{ form.username }}
         </div>
         <div class="form-row">
-          {{ form.password.errors }}
-          {{ form.password.label_tag }} {{ form.password }}
-          <input type="hidden" name="next" value="{{ next }}" />
+          {{ form.password1.errors }}
+          {{ form.password1.label_tag }} {{ form.password1 }} 
+        </div>
+        <div class="form-row">
+          {{ form.password2.errors }}
+          {{ form.password2.label_tag }} {{ form.password2 }} 
+        </div>
+        <div class="form-row">
+          {{ form.email.errors }}
+          {{ form.email.label_tag }} {{ form.email }} 
         </div>
       </div>
-      <!-- {% url 'admin_password_reset' as password_reset_url %}  -->
       <div class="submit-row">
-        <input class="button-primary" type="submit" value="Log in" />
+        <input class="button-primary" type="submit" value="Sign Up" />
       </div>
     </form>
-    <div id="signup_portal">
-      Don't have an account? <a href="{% url 'Cogito:SignUp' %}"> Sign Up </a>
-    </div>
+
     </div>
   </div>
 </div>
