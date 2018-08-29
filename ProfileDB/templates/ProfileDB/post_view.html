@@ -1,0 +1,37 @@
+<div class="docs-section" id="section_{{ post.id }}"> 
+  <div id="post_{{ post.id }}">
+    <h6 id="post_title" class="docs-header">{{ post.title }}</h6> 
+    <p id="post_text" >{{ post.text|linebreaksbr }}</p> 
+    <code>Danievsky | {{ post.published_date }}</code> 
+  </div>
+  {% include "ProfileDB/blog_form.html" with defaults=post form_id=post.id type='update_post' %}
+  <div id='changes_{{ post.id }}' style="display: none;">
+    <div class="changeblog">
+      <button class="deleteblog" id="delete_{{ post.id }}">
+          Delete
+      </button> 
+    </div>
+    <div class="changeblog">
+      <button class="editblog" id="edit_{{ post.id }}">
+        Edit
+      </button>
+    </div>
+  </div>
+  <div class="changeblog resp">
+    <a id='like_count_{{ post.id }}'>{{ post.liked_by.count }}</a>
+    <button class="like" id="like_{{ post.id }}">
+      Like
+    </button>
+  </div>
+  <div class="changeblog resp">
+    <button class="bookmark" id="bookmark_{{ post.id }}">
+      Bookmark
+    </button>
+  </div><br>
+<!--   <div class="changeblog resp">
+    <button class="comment" id="comment_{{ post.id }}">
+      Comment
+    </button>
+  </div> -->
+
+</div>   

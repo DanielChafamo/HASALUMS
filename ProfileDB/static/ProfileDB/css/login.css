@@ -1,0 +1,141 @@
+/* LOGIN FORM */
+
+body.login {
+  background: url('../img/shattered.png');
+}
+
+.login .blackboard, .breadcrums {
+  display: none;
+}
+
+.login #logo {
+  width: 70px;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-bottom: 30px;
+}
+
+
+.login #container {
+  padding: 10%;
+  min-height: 350px;
+  box-shadow: 0 0 20px 2px rgb(154, 159, 162); 
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 23em;
+  margin: auto auto;
+}
+
+.login #content-main {
+  width: 100%;
+}
+
+.login #login-form {
+  margin-top: 50px;
+}
+.login .form-row {
+  position: relative;
+  padding: 4px 0;
+  padding-top: 10px;
+  float: left;
+  width: 100%;
+  border-bottom: none;
+}
+
+.login .form-row label {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  padding-right: 0.5em;
+  line-height: 2em;
+  font-size: 1em;
+  clear: both;
+  color: #999;
+  z-index: 10;
+  transition: transform 150ms ease-out, font-size 150ms ease-out;
+}
+
+.login .focused label {
+  transform: translateY(-75%);
+  font-size: .75em;
+}
+
+.login .filled input {
+  box-shadow: 0 2px 0 0 lightgreen;
+}
+
+.login .form-row #id_username, #id_password, #id_password1,
+#id_password2, #id_email, #id_first_name, #id_last_name {
+  border: none;
+  border-bottom: 1px solid #999;
+  border-radius: 0px;
+  clear: both;
+  padding: 8px;
+  width: 100%; 
+}
+
+.login span.help {
+  font-size: 10px;
+  display: block;
+}
+
+.login .submit-row {
+  clear: both;
+  padding: 0;
+  margin: 0;
+  padding-top: 10%;
+  border: none; 
+  border-radius: 0;
+  text-align: center; 
+  background: none;
+}
+
+.login .submit-row input { 
+  width: 100%; 
+  background-color: #953634;
+  border-color: #953634;
+  border-radius: 0;
+  margin: 0;
+}
+
+.login .password-reset-link {
+  text-align: center;
+}
+
+.login #notice {
+  color: cornflowerblue;
+  margin-left: 14%;
+  margin-bottom: 40px;
+} 
+
+.login #logo_title { 
+  text-align: center;
+  font-family: roboto;
+  font-size: 45px;
+  font-weight: 100;
+  background: url(../img/hasa.png) 125px 135px no-repeat;
+  background-size: 90px;
+  height: 250px;
+  margin: 0;
+}
+
+.login #signup_portal {
+  text-align: center;
+  margin-top: 150px;
+}
+
+.login #login_portal {
+  text-align: center;
+  margin-top: 100px;
+}
+
+div.six.columns {
+  margin-top: 0 !important;
+}
+
+.navbar, .top_row, .bottom_row {
+  display: none;
+}
+

@@ -1,0 +1,83 @@
+{% extends "ProfileDB/site_base.html" %} 
+
+{% block breadcrums %}
+<div class="breadcrums">
+  <a href="{% url 'ProfileDB:home' %}">HASA Alumni Association</a> 
+  &rsaquo; 
+  <a href="{% url 'ProfileDB:profile' %}"> Profile </a> 
+</div>
+{% endblock %}
+
+{% block leftsidebar %}
+<nav class="leftsidebar">
+  <!-- List of previous post titles  
+  -----------------------------------------------> 
+  <ul>
+    <li><a href='#profile'>Account Details</a></li>
+    <li><a href='#profile'>Personal Information</a></li>
+  </ul>
+  <svg class="toc-marker" width="200" height="200" xmins="http://www.w3.org/2000/svg">
+    <path stroke="#444" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000"
+    stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5,-0.5)" />
+  </svg>
+</nav>
+{% endblock %}
+
+{% block bodycenter %}
+  
+<table class='profile_table'>
+  <tbody>
+    <tr class="firstname">
+      <td class='props'> First Name: </td>
+      <td class='vals'> {{ user.first_name }} </td>
+      <td>  
+        <a class="edit_firstname">  Edit </a> 
+      </td>
+    </tr>
+    <tr class="lastname">
+      <td class='props'> Last Name: </td>
+      <td class='vals'> {{ user.last_name }} </td>
+      <td>  
+        <a class="edit_lastname"> Edit </a> 
+      </td>
+    </tr>
+    <tr class="username">
+      <td class='props'> Username: </td>
+      <td class='vals'> {{ user.username }} </td>
+      <td>  
+        <a class="edit_username"> Edit </a> 
+      </td>
+    </tr>
+    <tr class="email">
+      <td class='props'> Email Address: </td>
+      <td class='vals'> {{ user.profile.email }} </td>
+      <td>  
+        <a class="edit_email"> Edit </a> 
+      </td>
+    </tr>
+    <tr class="contact">
+      <td class='props'> Contact Info: </td>
+      <td class='vals'> {{ user.profile.contact_info|default:'' }} </td>
+      <td>  
+        <a class="edit_contact"> Edit </a> 
+      </td>
+    </tr class="blurb">
+        <tr>
+      <td class='props'> Blurb: </td>
+      <td class='vals'> {{ user.profile.blurb|default:'' }} </td>
+      <td>  
+        <a class="edit_blurb"> Edit </a> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+ 
+ 
+<div class="docs-section" id="sep2a">  </div>
+
+{% endblock %}
+
+
+{% block rightsidebar %}  
+
+{% endblock %}

@@ -1,0 +1,290 @@
+.blackboard {
+  background: url('../img/shattered.png');
+  height: 40rem;
+  width: 100%;
+  padding-top: 50px;    
+}
+
+.breadcrums {
+  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+  background: white;
+  border-top: 1px solid #953634;
+  padding-left: 2%;
+}
+
+#postset {
+  padding: 0 5%;
+}
+
+.value-prop {
+  margin-top: 1rem; 
+}
+
+.value-props {
+  margin-top: 4rem;
+  margin-bottom: 4rem; 
+}
+
+.docs-header {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  letter-spacing: .2rem;
+  font-weight: 600; 
+}
+
+.docs-section {
+  border-top: 1px solid #eee;
+  padding: 4rem 0;
+  margin-bottom: 0;
+  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+}
+
+.value-img {
+  display: block;
+  text-align: center;
+  margin: 2.5rem auto 0; 
+}
+
+.example-grid .column,
+.example-grid .columns {
+  background: #EEE;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: .75rem;
+  font-weight: 600;
+  letter-spacing: .1rem; 
+}
+
+.docs-example .row,
+.docs-example.row,
+.docs-example form {
+  margin-bottom: 0; 
+}
+
+.docs-example h1,
+.docs-example h2,
+.docs-example h3,
+.docs-example h4,
+.docs-example h5,
+.docs-example h6 {
+  margin-bottom: 1rem; 
+}
+
+.heading-font-size {
+  font-size: 1.2rem;
+  color: #999;
+  letter-spacing: normal; 
+}
+
+.navbar {
+  display: none; 
+}
+
+
+/* Larger than phone */
+@media (min-width: 550px) {
+  .header {
+    margin-top: 10rem; 
+  }
+
+  .value-props {
+    margin-top: 9rem;
+    margin-bottom: 7rem; 
+  }
+
+  .value-img {
+    margin-bottom: 1rem; 
+  }
+
+  .example-grid .column,
+  .example-grid .columns {
+    margin-bottom: 1.5rem; 
+  }
+
+  .docs-section {
+    padding: 5rem 0; 
+  }
+
+  .example-send-yourself-copy {
+    float: right;
+    margin-top: 12px; 
+  }
+
+  .example-screenshot-wrapper {
+    position: absolute;
+    width: 48%;
+    height: 100%;
+    left: 0;
+    max-height: none; 
+  }
+
+}
+
+/* Larger than tablet */
+@media (min-width: 750px) {
+  /* Navbar */
+  .title {  
+    background: url(../img/hasa.png) 220px 150px no-repeat;
+    background-size: 150px;
+    text-align: center;
+    font-family: roboto;
+    font-size: 47px;
+    font-weight: 100;
+    margin: 0;
+    line-height: 1;
+    width: 500px;
+    height: 350px;
+    padding: 50px;
+  }
+
+  .navbar + .docs-section {
+    border-top-width: 0; 
+  }
+
+
+  .navbar,
+  .navbar-spacer {
+    position: fixed;
+    width: 100%; 
+    margin-top: 25px; 
+    display: block; 
+    height: 3.5rem;  
+    background: white;
+    border-bottom: 1px solid #953634; 
+  }
+
+  .navbar-spacer {
+    display: none; 
+  }
+
+  .navbar > .container {
+    width: 100%; 
+    margin-left: 50%;
+  }
+
+  .navbar-list {
+    list-style: none;
+    margin-bottom: 0;  
+  }
+
+  .navbar-item {
+    min-width: 67px;
+    position: relative;
+    float: left;
+    margin-bottom: 0;   
+    text-align: center;
+  }
+
+  .navbar-link {
+    color: #953634 !important; 
+    font-weight: 100;
+    width: 120px;
+    margin-bottom: 0;
+    border-radius: 0;
+    border: none; 
+    height: 35px;
+  }
+
+  .navbar-link:focus { 
+    background: url('../img/shattered.png');  
+    border: 1px solid #953634;
+    border-bottom: 2px solid #d9dbdb;
+    height: 33px; 
+  }
+
+  .navbar-link:hover { 
+    background: url('../img/shattered.png'); 
+    border: 1px solid #953634;
+    border-bottom: 2px solid #d9dbdb;
+    height: 33px; 
+  }
+
+  .navbar-link.active { 
+    color: white !important;
+    background: #953634;
+    border: 1px solid #953634;
+    height: 33px; 
+  }
+
+  .has-docked-crum .breadcrums {
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .has-docked-crum #postset {
+    margin-top: 25px;
+  }
+
+  .has-docked-crum .leftsidebar {
+    position: fixed;
+    top: 80px;
+    left: -7.8%;
+    width: inherit;
+  }
+
+/*  .has-docked-nav .navbar {
+    position: fixed;
+    width: 100%;
+    top: -65px;
+  }
+
+  .has-docked-nav .blackboard {
+    margin-top: 120px;
+  }*/
+
+  /* Popover */
+  .popover.open {
+    display: block;
+  }
+  .popover {
+    display: none;
+    position: absolute;  
+    top: 99%;
+    left: 0%; 
+    z-index: 99;
+  }
+
+  .popover-list {
+    background: url('../img/shattered.png');
+    width: 118px;
+    padding: 0;
+    margin: 0;
+    list-style: none; 
+    border: 1px solid #953634;
+    border-top: none;
+  }
+
+  .popover-item {
+    padding: 0;
+    margin: 0; 
+  }
+
+  .popover-link {
+    position: relative;
+    color: #222;
+    display: block;
+    padding: 8px 15px; 
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.0rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: .1rem; 
+  }
+
+  .popover-link:hover {
+    color: #fff;
+    background: #953634;
+  }
+
+
+
+}

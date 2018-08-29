@@ -1,0 +1,56 @@
+{% extends "ProfileDB/site_base.html" %} 
+
+{% block title %}
+HASA Alumni Association | {{ category|capfirst }}
+{% endblock %}
+
+{% block leftsidebar %}
+
+<nav class="leftsidebar">
+  <!-- List of previous post titles  
+  -----------------------------------------------> 
+  <ul>
+    <li><a href="#post_{{ posts.0.id }}">Previous Entries</a>
+      <ul>
+      {% for post in posts %}
+        <li> <a href="#post_{{ post.id }}">{{ post.title }}</a> <br/> </li>
+      {% endfor %}
+      </ul>  
+    </li>
+    <li><a href="#sep1a">Add New </a></li>
+  <svg class="toc-marker" width="200" height="200" xmins="http://www.w3.org/2000/svg">
+    <path stroke="#444" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000"
+    stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5,-0.5)" />
+  </svg>
+</nav>
+
+{% endblock %}
+
+{% block bodycenter %}
+<!-- Full body of previous Posts 
+  ----------------------------------------------->
+<div id="postset">  
+{% block postset %}  
+    {% for post in posts %}   
+      {% include 'ProfileDB/post_view.html' %}   
+    {% endfor %}  
+{% endblock %}  
+</div>
+
+<!-- Form to add new posts  
+  ----------------------------------------------->
+<div class="docs-section" id="sep1a">  
+  <div class="changeblog" id="addform_button"><button class="addblog">Add</button></div>
+  {% include "ProfileDB/blog_form.html" with form_id='add_form' type='create_post' %}
+</div>
+
+<div class="docs-section" id="sep2a"> 
+
+</div>
+
+{% endblock %}
+
+
+{% block rightsidebar %}  
+
+{% endblock %}
