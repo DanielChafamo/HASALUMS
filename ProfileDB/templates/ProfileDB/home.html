@@ -1,0 +1,51 @@
+{% extends "ProfileDB/site_base.html" %} 
+
+{% block title %}
+Harvard African Alumni Association | {{ category|capfirst }}
+{% endblock %}
+
+{% block leftsidebar %}
+<nav class="leftsidebar">
+  <!-- List of previous post titles  
+  -----------------------------------------------> 
+  <ul>
+    <li> <a href="#"> </a> <br/> </li> 
+  </ul>
+  <svg class="toc-marker" width="200" height="200" xmins="http://www.w3.org/2000/svg">
+    <path stroke="#444" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000"
+    stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5,-0.5)" />
+  </svg> 
+</nav>
+{% endblock %}
+
+{% block bodycenter %}
+<div class="six columns" style="margin-top: 2%"> 
+{% block postset %}  
+
+"The Harvard African Students Association (HASA) is a student organization at 
+Harvard College committed to nourishing cultural, intellectual, political and 
+economic awareness about the African Continent."
+
+<div class="row"> 
+  <div class="four columns outlinks" style="margin-top: 2%">  
+    <a href="{% url 'ProfileDB:about' %}">What is HASA?</a>
+  </div>  
+  <div class="four columns outlinks" style="margin-top: 2%">  
+    <a href="{% url 'ProfileDB:directory' %}">Alumni Profiles</a>
+  </div>  
+  <div class="four columns outlinks" style="margin-top: 2%">  
+    <a href="{% url 'ProfileDB:career' %}">Resources</a>
+  </div>  
+</div>
+
+{% endblock %}    
+
+<div class="docs-section" id="sep2a"></div>
+
+</div>
+{% endblock %}
+
+
+{% block rightsidebar %}  
+
+{% endblock %}

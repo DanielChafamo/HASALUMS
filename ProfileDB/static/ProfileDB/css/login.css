@@ -4,9 +4,10 @@ body.login {
   background: url('../img/shattered.png');
 }
 
-.login .blackboard, .breadcrums {
+.login .blackboard, .breadcrums, .slideshow {
   display: none;
 }
+ 
 
 .login #logo {
   width: 70px;
@@ -94,11 +95,17 @@ body.login {
 
 .login .submit-row input { 
   width: 100%; 
-  background-color: #953634;
+  background-color: #b14745;;
   border-color: #953634;
   border-radius: 0;
   margin: 0;
 }
+
+.login .submit-row input:hover {  
+  background-color: #953634;
+  border-color: #953634; 
+}
+ 
 
 .login .password-reset-link {
   text-align: center;

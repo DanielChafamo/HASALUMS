@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-dan = get_object_or_404(User, username='danielchafamo')
+# dan = get_object_or_404(User, username='danielchafamo')
 
 class Post(models.Model): 
     title = models.CharField(max_length=200)
@@ -13,7 +13,7 @@ class Post(models.Model):
     destination = models.CharField(max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
-    created_by = models.ForeignKey(User, related_name="created", default=dan.pk, on_delete=models.CASCADE) 
+    created_by = models.ForeignKey(User, related_name="created", on_delete=models.CASCADE) 
     liked_by = models.ManyToManyField(User, related_name="liked")
     bookmarked_by = models.ManyToManyField(User, related_name="bookmarked")
 
@@ -26,13 +26,15 @@ class Post(models.Model):
 
  
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE) 
-    firstname = models.CharField(max_length=200, null=True)
-    lastname = models.CharField(max_length=200, null=True)
+    user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)  
     # picture = models.ImageField()
     email = models.EmailField(max_length=264, null=True)
     email_confirmed = models.BooleanField(default=False)
     location = models.TextField(max_length=500, null=True)
+    current_job = models.TextField(max_length=500, null=True)
+    school = models.TextField(max_length=500, null=True)
+    year = models.TextField(max_length=500, null=True)
+    concentration = models.TextField(max_length=500, null=True)
     contact_info = models.TextField(max_length=500, null=True)
     blurb = models.TextField(max_length=1000, null=True)
 

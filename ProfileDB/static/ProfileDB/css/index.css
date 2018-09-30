@@ -1,21 +1,260 @@
+.directory_table {
+  font-family: monospace;
+  font-size: larger;
+}
+ 
+#hor-minimalist-b {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 12px;
+  background: #fff; 
+  border-collapse: collapse;
+  text-align: left;
+  margin-top: 5%;
+}
+
+#hor-minimalist-b th {
+  font-size: 14px;
+  font-weight: normal;
+  color: #039;
+  border-bottom: 2px solid #6678b1;
+  padding: 10px 8px;
+}
+
+#hor-minimalist-b td {
+  border-bottom: 1px solid #ccc;
+  color: #669;
+  padding: 6px 8px;
+}
+
+#ver-minimalist {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 12px;
+  width: 500px;
+  border-collapse: collapse;
+  margin: 35px;
+}
+
+#ver-minimalist th {
+  font-weight: normal;
+  text-align: center;
+  font-size: 14px; 
+  color: #953634;
+  padding: 8px 2px;
+  border-bottom: 2px solid #953634;
+  border-right: 30px solid whitesmoke;
+  border-left: 30px solid whitesmoke;
+}
+
+#ver-minimalist td { 
+  border-right: 30px solid whitesmoke;
+  border-left: 30px solid whitesmoke;
+  border-bottom: none;
+  text-align: center;
+  color: #953634;
+  padding: 12px 2px 0;
+}
+
+/* Profile Cards */
+.recipe-card {
+  font-family: 'Open Sans', sans-serif; 
+  max-width: 600px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.12), inset 0 -1px 0 0 #dadce0;
+  margin-bottom: 5%;
+}
+.recipe-card-right {
+  margin-left: 30%;
+}
+.recipe-card span.fa {
+  color: cornflowerblue
+}
+.recipe-card aside {
+  position: relative;
+}
+.recipe-card aside img {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.recipe-card aside .button {
+  background: #57abf2;
+  display: inline-block;
+  position: absolute;
+  top: 80%;
+  right: 3%;
+  width: 4.0625em;
+  height: 4.0625em;
+  border-radius: 4.0625em;
+  line-height: 4.0625em;
+  text-align: center;
+}
+.recipe-card aside .button .icon {
+  vertical-align: middle;
+}
+.recipe-card article {
+  padding: 1.25em 1.5em;
+}
+.recipe-card article ul {
+  list-style: none;
+  margin: 0.5em 0 0;
+  padding: 0;
+}
+.recipe-card article ul li {
+  display: inline-block;
+  margin-left: 1em;
+  line-height: 1em;
+}
+.recipe-card article ul li:first-child {
+  margin-left: 0;
+}
+.recipe-card article ul li .icon {
+  vertical-align: bottom;
+}
+.recipe-card article ul li span:nth-of-type(2) {
+  margin-left: 0.5em;
+  font-size: 0.8em;
+  font-weight: 300;
+  vertical-align: middle;
+  color: #838689;
+}
+.recipe-card article h2, .recipe-card article h3 {
+  margin: 0;
+  font-weight: 300;
+}
+.recipe-card article h2 {
+  font-size: 1.75em;
+  color: #222222;
+}
+.recipe-card article h3 {
+  font-size: 0.9375em;
+  color: #838689;
+}
+.recipe-card article p {
+  margin: 1.25em 0;
+  font-size: 0.8125em;
+  font-weight: 400;
+  color: #222222;
+}
+.recipe-card article p span {
+  font-weight: 700;
+  color: #000000;
+}
+.recipe-card article .ingredients {
+  margin: 2em 0 0.5em;
+}
+.recipe-card .icon {
+  display: inline;
+  display: inline-block;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/recipe-card-icons.svg);
+  background-repeat: no-repeat;
+}
+.recipe-card .icon-calories, .recipe-card .icon-calories\:regular {
+  background-position: 0 0;
+  width: 16px;
+  height: 19px;
+}
+.recipe-card .icon-clock, .recipe-card .icon-clock\:regular {
+  background-position: 0 -19px;
+  width: 20px;
+  height: 20px;
+}
+.recipe-card .icon-level, .recipe-card .icon-level\:regular {
+  background-position: 0 -39px;
+  width: 16px;
+  height: 19px;
+}
+.recipe-card .icon-play, .recipe-card .icon-play\:regular {
+  background-position: 0 -58px;
+  width: 21px;
+  height: 26px;
+}
+.recipe-card .icon-users, .recipe-card .icon-users\:regular {
+  background-position: 0 -84px;
+  width: 18px;
+  height: 18px;
+}
+
+
 /* Profile table */
 .profile_table {
-  width: 100%; 
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
+  width: 100%;  
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 12px; 
+  text-align: left;
+  border-collapse: collapse;
+  border: 1px solid #69c;
+  margin: 20px;
 }
 
 .profile_table td {
-  padding: 2px 10px;
+  color: #669;
+  padding: 7px 17px;
+}
+
+.profile_table th {
+  font-weight: normal;
+  font-size: 14px;
+  color: #039;
+  border-bottom: 1px dashed #69c;
+  padding: 12px 17px;
+}
+
+.profile_table a {
+  cursor: pointer;
+  font-size: small;
+  float: right;    
+}
+
+.submit {
+  display: none;
+  color: lightgreen !important;
+}
+
+.submit:hover{ 
+  color: green !important;
+}
+
+.cancel {
+  display: none;
+  color: red !important;
+}
+
+.cancel:hover { 
+  color: darkred !important;
+}
+
+.profile_table td { 
+  margin-bottom: -1px;
 }
 
 .props {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 13px;
+  width: 200px;
 }
 
 .vals {
+  font-weight: 100;
   color: #aaa;
+  width: 316px;
 }
+
+.editfield {
+  display: none;
+  margin-bottom: -1px;
+} 
+
+.editfield input {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+  height: 30px;
+}
+
+.editfield button {
+  line-height: 0;
+  height: 25px;
+} 
 
 /* Left Side bar */
 .leftsidebar { 
@@ -65,7 +304,6 @@
 }
 
 /* Others  */
-
 .borderedbox {
    border: 1px solid #eee;
  }
@@ -80,15 +318,305 @@
   width: 75%;
 }
 
+/* slideshow */ 
+
+.btn {
+  display: inline-block;
+  padding: 13px 20px;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  background: transparent;
+  border: 1px solid #e1e1e1;
+  font: 12px/1.2 "Oswald", sans-serif;
+  letter-spacing: 0.4em;
+  text-align: center;
+  text-indent: 2px;
+  text-transform: uppercase;
+  transition: color 0.1s linear 0.05s;
+}
+.btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #e1e1e1;
+  z-index: 1;
+  opacity: 0;
+  transition: height 0.2s ease, top 0.2s ease, opacity 0s linear 0.2s;
+}
+.btn::after {
+  transition: border 0.1s linear 0.05s;
+}
+.btn .btn-inner {
+  position: relative;
+  z-index: 2;
+}
+.btn:hover {
+  color: #373737;
+  transition: color 0.1s linear 0s;
+}
+.btn:hover::before {
+  top: 0;
+  height: 100%;
+  opacity: 1;
+  transition: height 0.2s ease, top 0.2s ease, opacity 0s linear 0s;
+}
+.btn:hover::after {
+  border-color: #373737;
+  transition: border 0.1s linear 0s;
+}
+
+.slideshow {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 50rem;
+  z-index: 1;
+}
+.slideshow .slideshow-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.slideshow .slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.slideshow .slide {
+  display: none;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.slideshow .slide.is-active {
+  display: block;
+}
+.slideshow .slide.is-loaded {
+  opacity: 1;
+}
+.slideshow .slide .caption {
+  padding: 0 100px;
+}
+.slideshow .slide .image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  z-index: 1;
+  background-size: cover;
+  image-rendering: optimizeQuality;
+}
+.slideshow .slide .image-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.slideshow .slide .image {
+  width: 100%;
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+.slideshow .slide-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slideshow .slide .title {
+  margin: 0 auto 15px;
+  max-width: 1000px;
+  font: 300 50px/1.2 "Oswald", sans-serif;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+.slideshow .slide .text {
+  margin: 0 auto;
+  max-width: 1000px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.slideshow .slide .btn {
+  margin: 15px 0 0;
+  border-color: #fff;
+}
+.slideshow .slide .btn::before {
+  background: #fff;
+}
+.slideshow .pagination {
+  position: absolute;
+  bottom: 35px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  cursor: default;
+  z-index: 2;
+  text-align: center;
+}
+.slideshow .pagination .item {
+  display: inline-block;
+  padding: 15px 5px;
+  position: relative;
+  width: 26px;
+  height: 32px;
+  cursor: pointer;
+  text-indent: -999em;
+  z-index: 1;
+}
+.slideshow .pagination .item + .page {
+  margin-left: -2px;
+}
+.slideshow .pagination .item::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 5px;
+  width: 16px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.2s ease;
+}
+.slideshow .pagination .item::after {
+  width: 0;
+  background: #fff;
+  z-index: 2;
+  transition: width 0.2s ease;
+}
+.slideshow .pagination .item:hover::before, .slideshow .pagination .item.is-active::before {
+  background-color: #fff;
+}
+.slideshow .arrows .arrow {
+  margin: -33px 0 0;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  z-index: 3;
+}
+.slideshow .arrows .prev {
+  left: 30px;
+}
+.slideshow .arrows .prev:hover .svg {
+  left: -10px;
+}
+.slideshow .arrows .next {
+  right: 30px;
+}
+.slideshow .arrows .next:hover .svg {
+  left: 10px;
+}
+.slideshow .arrows .svg {
+  position: relative;
+  left: 0;
+  width: 14px;
+  height: 26px;
+  fill: #fff;
+  transition: left 0.2s ease;
+}
+
+/* Pagination */
+#pagination a:hover {
+  cursor: pointer;
+}
+
+#pagination {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#pagination ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+#pagination ul li { 
+  display: flex;
+}
+ 
+#pagination ul li a { 
+  padding: 5px 10px; 
+  border-right: 0;
+  color: #953634;
+}
+
+#pagination ul li.active a {
+    background-color: #953634;
+    color: white;
+}
+ 
+
 /* Top and Bottom Rows */ 
+.navlogo {
+  width: 250px;
+  height: 3.5em !important;
+  font-size: larger;
+  line-height: 1.4; 
+  background: #953634;
+  border-radius: 0;
+  color: white !important;
+  text-decoration: none !important; 
+  box-shadow: 1px 4px 2px 0 rgba(0,0,0,0.12), inset 0px 0px 0 0 #c3c5c5;
+}
+
+
+.logo {
+  width: 40px;
+  height: 50px;
+  float: left;
+  padding-right: 10px;
+}
+
+.top_row i.fa {
+  margin-left: 20px;
+  margin-top: 5px;
+}
 .top_row {
   height: 25px;
   width: 100%;
-  background: white; 
+  background: #953634; 
   border-top: 1px solid #953634;
+  border-bottom: 2px solid #953634; 
   position: fixed;
   top:0;
   z-index: 99;
+  color: white; 
+  font-size: 12px;
+  font-weight: 100;
 }
 
 .logup { 
@@ -98,6 +626,7 @@
 
 #welcome {
   cursor: auto;
+  color: orchid !important;
 } 
 
 #welcome:hover {
@@ -112,47 +641,61 @@
   border-radius: 10px;
   font-weight: lighter;
   text-transform: none;
-  border: none;
-  color: orchid;
+  border: none; 
   text-align: center;
   font-size: 11px;
   letter-spacing: .1rem;
   cursor: pointer;
 }
 
-.bottom_row {
-  height: 25px;
-  width: 60%;
-  background: #f1f1f1;  
-  padding-left: 40%;
-  /*position: fixed;*/
+.logup a {
+  color: white !important;
 }
 
+.bottom_row { 
+  background: whitesmoke;
+  border-top: 1px solid #953634;
+}
 
+.copyright { 
+  height: 25px;
+  width: 60%; 
+  padding-left: 40%;
+  background: #953634;
+  border-top: 1px solid #953634;
+  color: white;
+  font-size: 12px;
+}
 
+#bottom_logo { 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  float: left;
+  font-size: 12px;
+  width: 300px;
+  margin: 75px;
+  color: #953634;
+}
+
+#bottom_logo img {
+  border: 0;
+  width: 80px;
+  height: 100px;
+  float: left;
+  margin-right: 25px;
+}
 
 /* Change buttons */
-
 .centerd_button { 
   position: relative;
   left: 45%;
 }
-
-/*.mce-notification-warning{
-  display:none!important;
-} */
+ 
 
 .changeblog {
   float: right;
   margin-bottom: 0;
   margin-top: 10px;
   margin-left: 10px;
-}
-
-.profile_table a {
-  font-size: small;
-  float: right;  
-  color: cornflowerblue;  
 }
 
 .changeblog button {
@@ -168,18 +711,15 @@
   color: cornflowerblue;
 }
 
-.changeblog .editblog {
-  /*color: #efb80b;*/
+.changeblog .editblog { 
   background: url(../img/icon-changelink.svg) 0 1px no-repeat;
 }
 
-.changeblog .deleteblog {
-  /*color: #dd4646;*/
+.changeblog .deleteblog { 
   background: url(../img/icon-deletelink.svg) 0 1px no-repeat;
 }
 
-.changeblog .addblog {
-  /*color: #70bf2b;*/
+.changeblog .addblog { 
   background: url(../img/icon-addlink.svg) 0 1px no-repeat;
 }
 

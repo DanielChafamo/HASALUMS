@@ -1,19 +1,44 @@
-.blackboard {
-  background: url('../img/shattered.png');
-  height: 40rem;
-  width: 100%;
-  padding-top: 50px;    
-}
-
 .breadcrums {
   font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
   background: white;
   border-top: 1px solid #953634;
   padding-left: 2%;
+  box-shadow: -1px -2px 1px 0 rgba(0,0,0,0.12), inset 0px 0px 0 0 #dadce0;
+}
+
+.bodynav .search-container {
+  float: right; 
+}
+
+.bodynav .search-container input { 
+  border-radius: 0;
+  width: 250px;
+}
+
+.bodynav .search-container button { 
+  padding: 0 20px;
+  margin-left: -5px;
+  border-left: 0;
+  border-radius: 0;
+  color: white;
+  background: #953634;
+}
+
+.bodynav .search-container button:hover {
+  background: #5f1f1d;
+}
+
+.directory_table {
+  width: 100%;
+  margin-top: 5%;
 }
 
 #postset {
   padding: 0 5%;
+}
+
+.outlinks {
+  text-align: center;
 }
 
 .value-prop {
@@ -129,20 +154,6 @@
 /* Larger than tablet */
 @media (min-width: 750px) {
   /* Navbar */
-  .title {  
-    background: url(../img/hasa.png) 220px 150px no-repeat;
-    background-size: 150px;
-    text-align: center;
-    font-family: roboto;
-    font-size: 47px;
-    font-weight: 100;
-    margin: 0;
-    line-height: 1;
-    width: 500px;
-    height: 350px;
-    padding: 50px;
-  }
-
   .navbar + .docs-section {
     border-top-width: 0; 
   }
@@ -154,9 +165,11 @@
     width: 100%; 
     margin-top: 25px; 
     display: block; 
-    height: 3.5rem;  
+    height: 4.1rem;  
     background: white;
     border-bottom: 1px solid #953634; 
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.12), inset 0 -1px 0 0 #dadce0;
+    z-index: 10;  
   }
 
   .navbar-spacer {
@@ -165,7 +178,7 @@
 
   .navbar > .container {
     width: 100%; 
-    margin-left: 50%;
+    margin-left: 25%;
   }
 
   .navbar-list {
@@ -184,39 +197,35 @@
   .navbar-link {
     color: #953634 !important; 
     font-weight: 100;
-    width: 120px;
-    margin-bottom: 0;
-    border-radius: 0;
+    width: 120px; 
     border: none; 
     height: 35px;
   }
 
-  .navbar-link:focus { 
-    background: url('../img/shattered.png');  
-    border: 1px solid #953634;
-    border-bottom: 2px solid #d9dbdb;
-    height: 33px; 
+  .navbar-link:focus p {   
+    border-bottom: 2px solid orchid;
   }
 
-  .navbar-link:hover { 
-    background: url('../img/shattered.png'); 
-    border: 1px solid #953634;
-    border-bottom: 2px solid #d9dbdb;
-    height: 33px; 
+  .navbar-link:hover p {  
+    border-bottom: 2px solid orchid;
   }
 
+  .navbar-link.active p {  
+    border-bottom: 2px solid orchid;
+  }
+  
   .navbar-link.active { 
-    color: white !important;
+    /*color: white !important;
     background: #953634;
     border: 1px solid #953634;
-    height: 33px; 
+    height: 38px; */
   }
 
   .has-docked-crum .breadcrums {
     position: fixed;
     top: 60px;
     width: 100%;
-    z-index: 1;
+    z-index: -1;
   }
 
   .has-docked-crum #postset {
@@ -230,15 +239,9 @@
     width: inherit;
   }
 
-/*  .has-docked-nav .navbar {
-    position: fixed;
-    width: 100%;
-    top: -65px;
+  .navbar p {
+    padding-top: 10px;
   }
-
-  .has-docked-nav .blackboard {
-    margin-top: 120px;
-  }*/
 
   /* Popover */
   .popover.open {
@@ -247,13 +250,14 @@
   .popover {
     display: none;
     position: absolute;  
-    top: 99%;
+    top: 32%;
     left: 0%; 
     z-index: 99;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.12), inset 0 -1px 0 0 #dadce0;
   }
 
   .popover-list {
-    background: url('../img/shattered.png');
+    background: white;
     width: 118px;
     padding: 0;
     margin: 0;
@@ -268,11 +272,10 @@
   }
 
   .popover-link {
-    position: relative;
-    color: #222;
+    position: relative; 
     display: block;
-    padding: 8px 15px; 
-    text-decoration: none;
+    padding: 2px 15px; 
+    border-top: 1px solid #ddd;
     text-transform: uppercase;
     font-size: 1.0rem;
     font-weight: 600;
@@ -280,9 +283,8 @@
     letter-spacing: .1rem; 
   }
 
-  .popover-link:hover {
-    color: #fff;
-    background: #953634;
+  .popover-link:hover p {
+    /*border-bottom: 2px solid orchid;*/
   }
 
 

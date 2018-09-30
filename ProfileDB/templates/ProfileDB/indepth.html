@@ -1,0 +1,63 @@
+{% extends "ProfileDB/site_base.html" %} 
+
+{% block title %}
+Harvard African Alumni Association | {{ category|capfirst }}
+{% endblock %}
+
+{% block leftsidebar %}
+
+<nav class="leftsidebar">
+  <!-- List of previous post titles  
+  -----------------------------------------------> 
+  <ul>
+    <li> <a href="#"> </a> <br/> </li> 
+  </ul>
+  <svg class="toc-marker" width="200" height="200" xmins="http://www.w3.org/2000/svg">
+    <path stroke="#444" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000"
+    stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5,-0.5)" />
+  </svg> 
+</nav>
+
+{% endblock %}
+
+{% block bodycenter %}
+<div class="eight columns" style="margin-top: 2%"> 
+ 
+{% for user in users %} 
+<div class="recipe-card {% if forloop.counter|divisibleby:2 %}recipe-card-right{% endif %}">
+  <aside>
+<!--    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" alt="Chai Oatmeal" /> -->
+  </aside>
+  <article>
+    <h2>{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</h2>
+    <h3>Analyst at Goldman Sacs</h3>
+    <ul> 
+      <li><span class="fa fa-university" aria-hidden="true"></span><span>{{ user.profile.school|default:'_' }}</span></li>
+      <li><span class="fa fa-graduation-cap" aria-hidden="true"></span><span>{{ user.profile.year|default:'_' }}</span></li>
+      <li><span class="fa fa-map-marker" aria-hidden="true"></span><span>{{ user.profile.location|default:'_' }}</span></li>
+    </ul>
+    <p> For an extra thick and creamy bowl, add oat bran.  It'll make for a 
+        hearty helping and also add more fiber to your meal.  If you love the taste 
+        of chai, you'll enjoy this spiced version with coriander, cinnamon, and 
+        turmeric.
+    </p>
+    <p class="ingredients">
+      <span>Interested in:&nbsp;</span>
+      Milk, salt, coriander, cardamom, cinnamon, turmeric, honey, vanilla 
+      extract, regular oats, oat bran.
+    </p>
+  </article>
+</div> 
+{% endfor %} 
+
+
+
+<div class="docs-section" id="sep2a"></div>
+
+</div>
+{% endblock %}
+
+
+{% block rightsidebar %}  
+
+{% endblock %}

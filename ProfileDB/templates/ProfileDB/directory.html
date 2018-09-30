@@ -1,0 +1,77 @@
+{% extends "ProfileDB/site_base.html" %} 
+
+{% block title %}
+Harvard African Alumni Association | {{ category|capfirst }}
+{% endblock %}
+
+{% block leftsidebar %}
+
+<nav class="leftsidebar">
+  <!-- List of previous post titles  
+  -----------------------------------------------> 
+  <ul>
+    <li> <a href="#"> </a> <br/> </li> 
+  </ul>
+  <svg class="toc-marker" width="200" height="200" xmins="http://www.w3.org/2000/svg">
+    <path stroke="#444" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000"
+    stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5,-0.5)" />
+  </svg> 
+</nav>
+
+{% endblock %}
+
+{% block bodycenter %}
+<div class="eight columns" style="margin-top: 2%"> 
+
+{% block postset %}  
+
+<div class="bodynav">
+  Alumni Directory 
+  <div class="search-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+</div>
+
+<table class="directory_table" id="hor-minimalist-b">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Year</th>
+        <th>School</th>
+        <th>Concentration</th>
+        <th>Current City</th>
+        <th>Current Job</th> 
+
+    </tr>
+  </thead>
+  <tbody>
+     {% for user in users %} 
+      <tr id="profile_{{ user.id }}">
+        <td> {{ user.first_name|capfirst }} {{ user.last_name|capfirst }} </td> 
+        <td> {{ user.profile.year|default:'_' }} </td> 
+        <td> {{ user.profile.school|default:'_' }} </td> 
+        <td> {{ user.profile.concentration|default:'_' }} </td> 
+        <td> {{ user.profile.location|default:'_' }} </td> 
+        <td> {{ user.profile.current_job|default:'_' }} </td> 
+      </tr>  
+      {% endfor %} 
+
+  </tbody>
+</table>
+ 
+ 
+<div id="pagination"></div>
+
+{% endblock %}  
+<div class="docs-section" id="sep2a"></div>
+
+</div>
+{% endblock %}
+
+
+{% block rightsidebar %}  
+
+{% endblock %}

@@ -1,5 +1,9 @@
 {% extends "ProfileDB/site_base.html" %} 
 
+{% block title %} 
+Harvard African Alumni Association | Profile
+{% endblock %}
+
 {% block breadcrums %}
 <div class="breadcrums">
   <a href="{% url 'ProfileDB:home' %}">HASA Alumni Association</a> 
@@ -14,7 +18,7 @@
   -----------------------------------------------> 
   <ul>
     <li><a href='#profile'>Account Details</a></li>
-    <li><a href='#profile'>Personal Information</a></li>
+    <li><a href='#profile'>Public Profile</a></li>
   </ul>
   <svg class="toc-marker" width="200" height="200" xmins="http://www.w3.org/2000/svg">
     <path stroke="#444" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000"
@@ -24,49 +28,140 @@
 {% endblock %}
 
 {% block bodycenter %}
-  
+<div class="six columns" style="margin-top: 2%"> 
 <table class='profile_table'>
   <tbody>
     <tr class="firstname">
       <td class='props'> First Name: </td>
       <td class='vals'> {{ user.first_name }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_fname" name="first_name" value="{{ user.first_name }}"> 
+      </td> 
       <td>  
-        <a class="edit_firstname">  Edit </a> 
+        <a href="edit_firstname">  Edit </a> 
+        <a class='submit' href="submit_firstname">  Submit </a> <br>
+        <a class='cancel' href="cancel_firstname">  Cancel </a> 
       </td>
+      
     </tr>
     <tr class="lastname">
       <td class='props'> Last Name: </td>
       <td class='vals'> {{ user.last_name }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_lname" name="last_name" value="{{ user.last_name }}"> 
+      </td> 
       <td>  
-        <a class="edit_lastname"> Edit </a> 
+        <a href="edit_lastname"> Edit </a> 
+        <a class='submit' href="submit_lastname">  Submit </a> <br>
+        <a class='cancel' href="cancel_lastname">  Cancel </a> 
       </td>
     </tr>
     <tr class="username">
       <td class='props'> Username: </td>
       <td class='vals'> {{ user.username }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_uname" name="username" value="{{ user.username }}"> 
+      </td> 
       <td>  
-        <a class="edit_username"> Edit </a> 
+        <a href="edit_username"> Edit </a> 
+        <a class='submit' href="submit_username">  Submit </a> <br>
+        <a class='cancel' href="cancel_username">  Cancel </a> 
       </td>
     </tr>
     <tr class="email">
       <td class='props'> Email Address: </td>
       <td class='vals'> {{ user.profile.email }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_email" name="email" value="{{ user.profile.email }}"> 
+      </td> 
       <td>  
-        <a class="edit_email"> Edit </a> 
+        <a href="edit_email"> Edit </a> 
+        <a class='submit' href="submit_email">  Submit </a> <br>
+        <a class='cancel' href="cancel_email">  Cancel </a> 
       </td>
     </tr>
     <tr class="contact">
       <td class='props'> Contact Info: </td>
-      <td class='vals'> {{ user.profile.contact_info|default:'' }} </td>
+      <td class='vals'> {{ user.profile.contact_info|default:'_' }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_cinfo" name="contact_info" value="{{ user.profile.contact_info|default:'_' }}"> 
+      </td> 
       <td>  
-        <a class="edit_contact"> Edit </a> 
+        <a href="edit_contact"> Edit </a> 
+        <a class='submit' href="submit_contact">  Submit </a> <br>
+        <a class='cancel' href="cancel_contact">  Cancel </a> 
       </td>
-    </tr class="blurb">
-        <tr>
+    </tr>
+    <tr class="blurb">
       <td class='props'> Blurb: </td>
-      <td class='vals'> {{ user.profile.blurb|default:'' }} </td>
+      <td class='vals'> {{ user.profile.blurb|default:'_' }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_blurb" name="blurb" value="{{ user.profile.blurb|default:'_' }}"> 
+      </td> 
       <td>  
-        <a class="edit_blurb"> Edit </a> 
+        <a href="edit_blurb"> Edit </a> 
+        <a class='submit' href="submit_blurb">  Submit </a> <br>
+        <a class='cancel' href="cancel_blurb">  Cancel </a> 
+      </td>
+    </tr>
+    <tr class="location">
+      <td class='props'> Current City: </td>
+      <td class='vals'> {{ user.profile.location|default:'_' }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_location" name="location" value="{{ user.profile.location|default:'_' }}"> 
+      </td> 
+      <td>  
+        <a href="edit_location"> Edit </a> 
+        <a class='submit' href="submit_location">  Submit </a> <br>
+        <a class='cancel' href="cancel_location">  Cancel </a> 
+      </td>
+    </tr>
+    <tr class="currentjob">
+      <td class='props'> Current Job: </td>
+      <td class='vals'> {{ user.profile.current_job|default:'_' }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_currentjob" name="currentjob" value="{{ user.profile.current_job|default:'_' }}"> 
+      </td> 
+      <td>  
+        <a href="edit_currentjob"> Edit </a> 
+        <a class='submit' href="submit_currentjob">  Submit </a> <br>
+        <a class='cancel' href="cancel_currentjob">  Cancel </a> 
+      </td>
+    </tr>
+    <tr class="school">
+      <td class='props'> School: </td>
+      <td class='vals'> {{ user.profile.school|default:'_' }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_school" name="school" value="{{ user.profile.school|default:'_' }}"> 
+      </td> 
+      <td>  
+        <a href="edit_school"> Edit </a> 
+        <a class='submit' href="submit_school">  Submit </a> <br>
+        <a class='cancel' href="cancel_school">  Cancel </a> 
+      </td>
+    </tr>
+    <tr class="year">
+      <td class='props'> Year: </td>
+      <td class='vals'> {{ user.profile.year|default:'_' }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_year" name="year" value="{{ user.profile.year|default:'_' }}"> 
+      </td> 
+      <td>  
+        <a href="edit_year"> Edit </a> 
+        <a class='submit' href="submit_year">  Submit </a> <br>
+        <a class='cancel' href="cancel_year">  Cancel </a> 
+      </td>
+    </tr>
+    <tr class="concentration">
+      <td class='props'> Concentration: </td>
+      <td class='vals'> {{ user.profile.concentration|default:'_' }} </td>
+      <td class='editfield'> 
+        <input class="u-full-width" type="text" id="p_concentration" name="concentration" value="{{ user.profile.concentration|default:'_' }}"> 
+      </td> 
+      <td>  
+        <a href="edit_concentration"> Edit </a> 
+        <a class='submit' href="submit_concentration">  Submit </a> <br>
+        <a class='cancel' href="cancel_concentration">  Cancel </a> 
       </td>
     </tr>
   </tbody>
@@ -74,7 +169,7 @@
  
  
 <div class="docs-section" id="sep2a">  </div>
-
+</div>
 {% endblock %}
 
 

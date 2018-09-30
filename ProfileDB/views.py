@@ -26,11 +26,10 @@ site_struct = \
     ("Home", [
         "home" ]),
     ("Profiles",[
-        "students", 
-        "alumni"]), 
-    ("Events", [
-        "social",
-        "networking"]), 
+        "directory", 
+        "indepth"]), 
+    ("Logo",[
+        "logo"]), 
     ("Resources", [
         "clubs", 
         "career"]),  
@@ -41,8 +40,61 @@ site_struct = \
 categories = []
 for direc in site_struct:
   categories += direc[1]
- 
 
+# 
+# Base Site Views
+# 
+
+def HomeView(request): 
+  users = User.objects.all().order_by('last_name')    
+  context = HeaderContexts(request)
+  context['users'] = users
+  return render(request, 'ProfileDB/home.html', context=context) 
+
+def DirectoryView(request):
+  users = User.objects.all().order_by('last_name')    
+  context = HeaderContexts(request)
+  context['users'] = users
+  return render(request, 'ProfileDB/directory.html', context=context) 
+
+def IndepthView(request):
+  users = User.objects.all().order_by('last_name')    
+  context = HeaderContexts(request)
+  context['users'] = users
+  return render(request, 'ProfileDB/indepth.html', context=context) 
+
+def SocialView(request):
+  context = HeaderContexts(request) 
+  return render(request, 'ProfileDB/social.html', context=context) 
+
+def NetworkingView(request):
+  context = HeaderContexts(request) 
+  return render(request, 'ProfileDB/networking.html', context=context) 
+
+def ClubsView(request):
+  context = HeaderContexts(request) 
+  return render(request, 'ProfileDB/clubs.html', context=context) 
+
+def CareerView(request):
+  context = HeaderContexts(request) 
+  return render(request, 'ProfileDB/career.html', context=context)  
+
+def AboutView(request):
+  context = HeaderContexts(request) 
+  return render(request, 'ProfileDB/about.html', context=context)  
+
+def LogoView(request):
+  return HomeView()
+
+def HeaderContexts(request):
+  category = request.META["PATH_INFO"][1:-1]
+  if category == '':
+    category = "home" 
+  return { 
+    'category': category,
+    'categories': categories, 
+    'site_struct': site_struct
+  }
 # 
 #   CURD views
 # 
@@ -70,15 +122,15 @@ def RetrievePost(request):
   bookmarked = posts.filter(bookmarked_by__username=request.user)
   
   context = {
-      'form': form, 
-      'posts': posts, 
-      'liked': json.dumps([lpost.pk for lpost in liked]),
-      'created': json.dumps([cpost.pk for cpost in created]),
-      'bookmarked': json.dumps([bpost.pk for bpost in bookmarked]),
-      'category': category,
-      'categories': categories, 
-      'site_struct': site_struct
-    } 
+    'form': form, 
+    'posts': posts, 
+    'liked': json.dumps([lpost.pk for lpost in liked]),
+    'created': json.dumps([cpost.pk for cpost in created]),
+    'bookmarked': json.dumps([bpost.pk for bpost in bookmarked]),
+    'category': category,
+    'categories': categories, 
+    'site_struct': site_struct
+  } 
   return render(request, 'ProfileDB/blog.html', context=context) 
 
 @login_required(login_url='/login/')
@@ -87,12 +139,26 @@ def DeletePost(request):
   post.delete()
   return JsonResponse({'success': True, 'pid': request.POST['pid']})
 
+def SavePost(request, form):
+  if form.is_valid():
+    post = form.save(commit=False) 
+    post.published_date = timezone.now() 
+    post.created_by = request.user
+    post.save() 
+    return JsonResponse({
+      'success': True,
+      'title': post.title, 
+      'text': post.text, 
+      'destination': post.destination,
+      'pid': post.pk
+    })
+  else:
+    return JsonResponse({'success': False, 'error': 'Form invalid'})
 
 # 
 # Like, comment, bookmark views
 # 
 
-# @login_required(login_url='/login/')
 def LogResponse(request):
   print(request.user.is_authenticated)
   if not request.user.is_authenticated:
@@ -111,16 +177,12 @@ def LogResponse(request):
 
 
 # 
-# Personal views
+# Profile views
 # 
 
 @login_required(login_url='/login/')
-def ProfilePage(request): 
-  user_form = UserForm()   
-  profile_form = ProfileForm() 
-  context = {    
-      'user_form': user_form,
-      'profile_form': profile_form,
+def ProfilePage(request):  
+  context = {     
       'categories': categories, 
       'site_struct': site_struct
     } 
@@ -128,27 +190,15 @@ def ProfilePage(request):
  
     
 @login_required(login_url='/login/')
-def UpdateProfile(request): 
-  user_form = UserForm(request.POST, instance=request.user)   
-  profile_form = ProfileForm(request.POST, instance=request.user.profile)    
+def UpdateProfile(request):  
+  user_form = UserForm(request.POST or None, instance=request.user)      
+  profile_form = ProfileForm(request.POST or None, instance=request.user.profile)    
   if user_form.is_valid() and profile_form.is_valid():
     user_form.save() 
     profile_form.save()
-    return JsonResponse({'success': True,
-                         'user_form': user_form,
-                         'profile_form': profile_form})
+    return JsonResponse({'success': True})
   else:
     return JsonResponse({'success': False, 'error': 'Form invalid'}) 
-
-def RetrieveProfiles(request):    
-  users = User.objects.all()   
-  context = { 
-      'users': users,
-      'category': category,
-      'categories': categories, 
-      'site_struct': site_struct
-    } 
-  return render(request, 'ProfileDB/blog.html', context=context) 
 
 @login_required(login_url='/login/')
 def DeleteProfile(request):
@@ -205,21 +255,4 @@ def Activate(request, uidb64, token):
 def AccountActivationSent(request):
   return render(request, 'registration/account_activation_sent.html')
 
-# 
-# Helpers
-# 
- 
-def SavePost(request, form):
-  if form.is_valid():
-    post = form.save(commit=False) 
-    post.published_date = timezone.now() 
-    post.created_by = request.user
-    post.save() 
-    return JsonResponse({'success': True,
-                         'title': post.title, 
-                         'text': post.text, 
-                         'destination': post.destination,
-                         'pid': post.pk})
-  else:
-    return JsonResponse({'success': False, 'error': 'Form invalid'})
 

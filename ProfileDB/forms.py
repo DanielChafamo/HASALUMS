@@ -22,14 +22,14 @@ class SignUpForm(UserCreationForm):
 class UserForm(forms.ModelForm):
 
   class Meta:
-    model = UserProfile 
-    fields = ('firstname', 'lastname', 'email', )
+    model = User  
+    fields = ('first_name', 'last_name', 'username', )
 
 
 class ProfileForm(forms.ModelForm):
 
   class Meta:
     model = UserProfile 
-    fields = ('location', 'contact_info', 'blurb', )
+    fields = ('email', 'contact_info', 'blurb', "location", "current_job", "school", "year", "concentration")
 
     

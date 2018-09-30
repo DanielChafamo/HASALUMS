@@ -21,6 +21,7 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   {% load staticfiles %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static 'ProfileDB/css/normalize.css' %}">
   <link rel="stylesheet" href="{% static 'ProfileDB/css/skeleton.css' %}">
   <link rel="stylesheet" href="{% static 'ProfileDB/css/base.css' %}">
@@ -30,7 +31,7 @@
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="{% static 'ProfileDB/img/favicon2.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'ProfileDB/img/rhasa.png' %}">
 
 </head>
 <body class="code-snippets-visible {% block extrabodyclass %} {% endblock %}">
@@ -43,17 +44,55 @@
   <footer>
      <!-- Footer  
     ----------------------------------------------->
+    
     <div class="bottom_row">
-      <code> Daniel Chafamo | 2018</code>
+      <div id="bottom_logo">
+        <img src="../static/ProfileDB/img/download.png">
+        HASA Alumni Association is a subsidiary of HASA and Harvard College.
+      </div>
+      <table id="ver-minimalist">
+        <thead>
+          <tr>
+              <th>Site Links</th>
+              <th>External Links</th>
+              <th>Follow Us</th> 
+          </tr>
+        </thead>
+        <tbody> 
+          <tr> 
+            <td> Alumni directory </td> 
+            <td> Harvard main site</td>  
+            <td> Facebook </td>  
+          </tr> 
+          <tr> 
+            <td> In depth alumni profiles  </td> 
+            <td> HASA main site </td> 
+            <td> Instagram </td>   
+          </tr> 
+          <tr> 
+            <td> Career resources </td> 
+            <td> Harvard Alumni main site </td>  
+            <td>  </td>  
+          </tr> 
+          <tr> 
+            <td> About us </td> 
+            <td> Crimson Careers </td>  
+            <td>  </td>  
+          </tr>   
+        </tbody>
+      </table>
+      <div class="copyright">
+        &copy; 2018 Harvard African Alumni Association
+      </div>
     </div>
   </footer>
   {% endblock %}
 
   <!-- Scripts --> 
-  <script type="text/javascript" src="{% static 'External/js/jquery-1.11.3.min.js' %}" ></script>
+  <!-- <script type="text/javascript" src="{% static 'External/js/jquery-1.11.3.min.js' %}" ></script> -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>    
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>  
   <script type="text/javascript" src="{% static 'ProfileDB/js/csrf_form_ajax.js' %}"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>  -->
   <!-- <script type="text/javascript" src="{% static 'External/js/bootstrap.min.js' %}" ></script> -->
   {% block extrascripts %} {% endblock %}
 

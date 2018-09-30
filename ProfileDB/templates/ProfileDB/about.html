@@ -1,0 +1,49 @@
+{% extends "ProfileDB/site_base.html" %} 
+
+{% block title %}
+Harvard African Alumni Association | {{ category|capfirst }}
+{% endblock %}
+
+{% block leftsidebar %}
+
+<nav class="leftsidebar">
+  <!-- List of previous post titles  
+  -----------------------------------------------> 
+  <ul>
+    <li>  <a href="#section_ah">About HASA</a></li>
+    <li>  <a href="#section_hms">HASA Misson Statement</a></li>
+    <li>  <a href="#section_ahaa">About HASA Alumni Association</a></li> 
+  <svg class="toc-marker" width="200" height="200" xmins="http://www.w3.org/2000/svg">
+    <path stroke="#444" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000"
+    stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5,-0.5)" />
+  </svg>
+</nav>
+{% endblock %}
+
+{% block bodycenter %}
+<div class="six columns" style="margin-top: 2%"> 
+  <div class="docs-section" id="section_hms"> 
+    <div>
+      <h6 class="docs-header">HASA Misson Statement</h6> 
+      <p>
+        “The Harvard African Students' Association, founded in 1977, is an 
+        organization committed to nourishing cultural, intellectual, political 
+        and economic awareness about the African continent. We are the Harvard 
+        community for students from Africa, connected to Africa, or interested 
+        in matters concerning Africa. Anyone who is intrigued by lively debates, 
+        art shows, cultural shows, music, and African cuisine will find a 
+        welcoming home at HASA. We are dedicated to building community and 
+        promoting collaboration amongst African students at Harvard, encouraging 
+        awareness of Africa within the Harvard community and the greater Boston 
+        area, and ultimately contributing back our continent.”
+      </p>
+    </div> 
+  </div>
+  <div class="docs-section" id="sep2a"></div>
+</div>
+{% endblock %}
+
+
+{% block rightsidebar %}  
+
+{% endblock %}
